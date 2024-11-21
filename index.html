@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"/>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/github-markdown-css/2.2.1/github-markdown.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css"/>
+  <title>2024 GBit GameJam - 上上海海蓬莱蓬莱蔚蓝档案坏苹果</title>
+</head>
+<body>
+  <div id="content" style="margin: 5vw;"></div>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js" data-manual></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script type="module">
+    import markdownIt from 'https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/+esm';
+    import markdownItKatex from 'https://cdn.jsdelivr.net/npm/markdown-it-katex@2.0.3/+esm'
+    const md = markdownIt();
+    md.use(markdownItKatex);
+    (async () => {
+        let fres;
+        do{
+          fres = await fetch("./readme.md");
+        }while(!fres.ok);
+        let text = await fres.text();
+        document.getElementById('content').innerHTML = md.render(text);
+        Prism.highlightAll();
+    })();
+  </script>
+  
+</body>
+</html>

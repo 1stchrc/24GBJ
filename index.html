@@ -13,14 +13,11 @@
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
   <script type="module">
     import markdownIt from 'https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/+esm';
-    import markdownItKatex from 'https://cdn.jsdelivr.net/npm/markdown-it-katex@2.0.3/+esm'
+    import markdownItKatex from 'https://cdn.jsdelivr.net/npm/markdown-it-katex@2.0.3/+esm';
     const md = markdownIt();
     md.use(markdownItKatex);
     (async () => {
-        let fres;
-        do{
-          fres = await fetch("./readme.md");
-        }while(!fres.ok);
+        let fres = await fetch("./readme.md");
         let text = await fres.text();
         document.getElementById('content').innerHTML = md.render(text);
         Prism.highlightAll();

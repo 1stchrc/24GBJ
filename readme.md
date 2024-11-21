@@ -20,4 +20,10 @@
 
 **Godot：** 游戏引擎、编辑器，解压缩到你希望的位置即可
 
-**marktext：** markdown文件编辑器，因为所有人都痛恨Microsoft Word所以用markdown来代替word吧，按照安装程序指导安装即可
+**marktext：** markdown文件编辑器，~~因为所有人都痛恨Microsoft Word所以~~用markdown来代替word吧，按照安装程序指导安装即可
+
+~~**VSCode：** 大抵用不上，不放了
+
+
+
+~~

@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=4 uid="uid://2t2i0lr3ckbe"]
+
+[ext_resource type="Script" path="res://TestLevel.cs" id="1_0c4ed"]
+[ext_resource type="TileSet" uid="uid://oqry6hl4sltk" path="res://new_tile_set.tres" id="1_eegwm"]
+[ext_resource type="Texture2D" uid="uid://3fhmpt6ns0cu" path="res://icon.svg" id="3_17250"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b35p0"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_doj1p"]
+size = Vector2(64, 64)
+
+[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("playerBody", "playerSoul")]
+script = ExtResource("1_0c4ed")
+playerBody = NodePath("CharacterBody2D")
+playerSoul = NodePath("CharacterBody2D2")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAABABIAAAAAAAEAAAACABIAAAAAAAEAAAADABIAAAAAAAEAAAAEABIAAAAAAAEAAAAFABIAAAAAAAEAAAAGABIAAAAAAAEAAAAHABIAAAAAAAEAAAAIABIAAAAAAAEAAAAJABIAAAAAAAEAAAAKABIAAAAAAAEAAAALABIAAAAAAAEAAAAMABIAAAAAAAEAAAANABIAAAAAAAEAAAAOABIAAAAAAAEAAAAPABIAAAAAAAEAAAAQABIAAAAAAAEAAAARABIAAAAAAAEAAAASABIAAAAAAAEAAAATABIAAAAAAAEAAAAUABIAAAAAAAEAAAAVABIAAAAAAAEAAAAWABIAAAAAAAEAAAAXABIAAAAAAAEAAAAYABIAAAAAAAEAAAAZABIAAAAAAAEAAAAaABIAAAAAAAEAAAAbABIAAAAAAAEAAAAcABIAAAAAAAEAAAAcABEAAAAAAAEAAAAcABAAAAAAAAEAAAATAA8AAAAAAAEAAAAUAA8AAAAAAAEAAAAUABAAAAAAAAEAAAATABAAAAAAAAEAAAATABEAAAAAAAEAAAASABEAAAAAAAEAAAAZABAAAAAAAAEAAAAaABAAAAAAAAEAAAAbABAAAAAAAAEAAAAUAAkAAAAAAAAAAAAUAAoAAAAAAAAAAAAUAAsAAAAAAAAAAAAUAAwAAAAAAAAAAAAUAA0AAAAAAAAAAAAUAA4AAAAAAAAAAAAUAAcAAAAAAAAAAAAUAAgAAAAAAAAAAAAUAAYAAAAAAAAAAAAUAAUAAAAAAAAAAAA=")
+tile_set = ExtResource("1_eegwm")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(401, 403)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_b35p0")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_17250")
+
+[node name="CharacterBody2D2" type="CharacterBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D2"]
+shape = SubResource("RectangleShape2D_doj1p")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D2"]
+modulate = Color(0.211765, 0.2, 0.0156863, 0.521569)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_17250")

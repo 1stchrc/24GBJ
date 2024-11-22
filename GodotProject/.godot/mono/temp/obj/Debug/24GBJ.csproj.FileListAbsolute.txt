@@ -1,0 +1,17 @@
+D:\repos\24GBJ\GodotProject\.godot\mono\temp\bin\Debug\24GBJ.deps.json
+D:\repos\24GBJ\GodotProject\.godot\mono\temp\bin\Debug\24GBJ.runtimeconfig.json
+D:\repos\24GBJ\GodotProject\.godot\mono\temp\bin\Debug\24GBJ.dll
+D:\repos\24GBJ\GodotProject\.godot\mono\temp\bin\Debug\24GBJ.pdb
+D:\repos\24GBJ\GodotProject\.godot\mono\temp\bin\Debug\GodotSharp.dll
+D:\repos\24GBJ\GodotProject\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+D:\repos\24GBJ\GodotProject\.godot\mono\temp\obj\Debug\24GBJ.csproj.AssemblyReference.cache
+D:\repos\24GBJ\GodotProject\.godot\mono\temp\obj\Debug\24GBJ.GeneratedMSBuildEditorConfig.editorconfig
+D:\repos\24GBJ\GodotProject\.godot\mono\temp\obj\Debug\24GBJ.AssemblyInfoInputs.cache
+D:\repos\24GBJ\GodotProject\.godot\mono\temp\obj\Debug\24GBJ.AssemblyInfo.cs
+D:\repos\24GBJ\GodotProject\.godot\mono\temp\obj\Debug\24GBJ.csproj.CoreCompileInputs.cache
+D:\repos\24GBJ\GodotProject\.godot\mono\temp\obj\Debug\24GBJ.csproj.CopyComplete
+D:\repos\24GBJ\GodotProject\.godot\mono\temp\obj\Debug\24GBJ.dll
+D:\repos\24GBJ\GodotProject\.godot\mono\temp\obj\Debug\refint\24GBJ.dll
+D:\repos\24GBJ\GodotProject\.godot\mono\temp\obj\Debug\24GBJ.pdb
+D:\repos\24GBJ\GodotProject\.godot\mono\temp\obj\Debug\24GBJ.genruntimeconfig.cache
+D:\repos\24GBJ\GodotProject\.godot\mono\temp\obj\Debug\ref\24GBJ.dll

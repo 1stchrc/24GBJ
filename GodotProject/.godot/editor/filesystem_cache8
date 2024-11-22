@@ -1,0 +1,7 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1732284116
+icon.svg::CompressedTexture2D::1976056777739572668::1732282029::1732282038::1::::<><>::
+new_tile_set.tres::TileSet::1016750542504906812::1732284104::0::1::::<><>::uid://cixk3drwvd3fb::::res://testtiles.png
+CharacterBody2d.cs::CSharpScript::-1::1732283796::0::1::::<>CharacterBody2D<>::
+testLevel.tscn::PackedScene::1935976931596455806::1732284116::0::1::::<><>::uid://oqry6hl4sltk::::res://new_tile_set.tres<>res://CharacterBody2d.cs<>uid://3fhmpt6ns0cu::::res://icon.svg
+testtiles.png::CompressedTexture2D::5382490161850356099::1732284155::1732284156::1::::<><>::

@@ -1,25 +1,9 @@
 # TODO：
 
-## 确保以下软件被安装：
+（分工仅供参考，我的意思是可以这只是我的一面之词，你们比我更知道你们的分工  ————赛博死灵法师）
 
-<img title="" src="./TODO/temp1.jpg" alt="（真的要把这些东西放到github仓库里吗，这也太大了）" width="162" data-align="center">
+**完成展示基本游戏机制的Demo** （程序）
 
-~~（真的要把这些东西放到github仓库里吗，这也太大了）~~
+**确定游戏背景氛围** （策划，音乐，美术）
 
-~~论如何用github下载github desktop~~
-
-## 功能说明：
-
-**dotnet-sdk：** 调试godot项目所需要的依赖，按照安装程序指导安装即可
-
-**GitHubDesktop：** 多人合作管理项目文件的工具，这样我们就不需要一直在群里传文件了，按照安装程序指导安装即可
-
-**GitHubDesktop汉化工具：** 如果你对你的英语水平有信心可以不下，使用方式：先安装好github desktop，下载之后解压缩，然后
-
-<img title="" src="./TODO/temp2.png" alt="简单易懂的使用步骤" data-align="center" width="454">
-
-**Godot：** 游戏引擎、编辑器，解压缩到你希望的位置即可
-
-**marktext：** markdown文件编辑器，~~因为所有人都痛恨Microsoft Word所以~~用markdown来代替word吧，按照安装程序指导安装即可
-
-~~**VSCode：** 大抵用不上，不放了~~
+**确定人物设计、背景设定，最好有一些概念图之类的** （策划，美术）

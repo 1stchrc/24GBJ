@@ -28,10 +28,6 @@ namespace Fcc{
                     result = x;
                     continuation();
                 };
-                if(dsp.tasks == null){
-                    dsp.tasks = theAction;
-                    return;
-                }
                 dsp.tasks += theAction;
             }
             public T GetResult(){return result;}
@@ -45,27 +41,16 @@ namespace Fcc{
 
         public class EventSrcCounterAwaiter : INotifyCompletion{
             EventSrc<T> dsp;
-            int count;
+            public int count;
             public bool IsCompleted => count <= 0;
-            Action<T> theAction;
-            public void OnCompleted(Action continuation){
-                theAction = x => {
-                    if(IsCompleted){
-                        continuation();
-                        return;
-                    }
+            bool discarded = false;
+            public async void OnCompleted(Action continuation){
+                while(!IsCompleted){
+                    await dsp.Wait();
+                    if(discarded)return;
                     --count;
-                    if(dsp.tasks == null){
-                        dsp.tasks = theAction;
-                        return;
-                    }
-                    dsp.tasks += theAction;
-                };
-                if(dsp.tasks == null){
-                    dsp.tasks = theAction;
-                    return;
                 }
-                dsp.tasks += theAction;
+                continuation();
             }
             public void GetResult(){}
             internal EventSrcCounterAwaiter(EventSrc<T> ds, int c){
@@ -76,12 +61,13 @@ namespace Fcc{
                 return this;
             }
             public void Discard(){
-                dsp.tasks -= theAction;
+                discarded = true;
             }
         }
     }
     public class EventCounter<T>{
         public bool elapsed{get; private set;}
+        public int count => evCounterAw == null ? 0 : evCounterAw.count;
         EventSrc<T> ev;
         EventSrc<T>.EventSrcCounterAwaiter evCounterAw;
         public void Rewind(int count){

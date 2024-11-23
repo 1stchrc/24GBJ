@@ -6,35 +6,32 @@ using Godot;
 
 namespace Fcc{
     public static class PlayerSpirit{
-        static float maxHSpeed => 400.0f;
-        static float hAccel => 3000.0f;
-        static float hDrag => 1000.0f;
+        static float maxHSpeed => 500.0f;
+        static float hAccel => 2000.0f;
+        static float hDrag => 1500.0f;
         static float airHMultiplier => 0.7f;
         static float jumpHVel => 50.0f;
-        static float jumpVVel => 400.0f;
-        static float gravity => 2500.0f;
+        static float jumpVVel => 500.0f;
+        static float gravity => 3200.0f;
         static float maxFallSpeed => 500.0f;
         static float jumpGravityMultiplier => 0.15f;
-        static int jumpFrames => 13;
-        static int wolfFrames => 6;
-        static int preFrames => 6;
-        
-
+        static ulong jumpFrames => 12;
+        static ulong wolfFrames => 6;
+        static ulong preFrames => 6;
         public static async void Possess(
             CharacterBody2D bodyb, 
             CharacterBody2D soulb, 
             EventSrc<float> phu){
-            
-            var counterEv = new EventSrc<int>();
-
-            var wolfCounter = new EventCounter<int>(counterEv);
-            var preCounter = new EventCounter<int>(counterEv);
-            var jmpCounter = new EventCounter<int>(counterEv);
 
             CharacterBody2D cb = bodyb;
             CharacterBody2D bb = null;
             soulb.GetParent().RemoveChild(soulb);
             bool isSoulForm = false;
+
+            ulong frameCounter = 0;
+            ulong wolfTill = 0;
+            ulong preTill = 0;
+            ulong jumpTill = 0;
             for(;;){
                 float dt = await phu.Wait();
                 if(Input.IsActionJustPressed("soul_projection")){
@@ -44,6 +41,8 @@ namespace Fcc{
                         soulb.Velocity = bodyb.Velocity;
                         cb = soulb;
                         bb = bodyb;
+                        bodyb.CollisionLayer = 1;
+                        bodyb.CollisionMask = 4;
                         isSoulForm = true;
                     }else{
                         var dis = soulb.Transform.Origin - bodyb.Transform.Origin;
@@ -52,9 +51,10 @@ namespace Fcc{
                             soulb.GetParent().RemoveChild(soulb);
                             cb = bodyb;
                             bb = null;
+                            bodyb.CollisionLayer = 3;
+                            bodyb.CollisionMask = 12;
                             isSoulForm = false;
-                            wolfCounter.Rewind(0);
-                            jmpCounter.Rewind(0);
+                            wolfTill = jumpTill = 0;
                         }
                     }
                 }
@@ -65,22 +65,21 @@ namespace Fcc{
                         int sgn = Mathf.Sign(vel.X);
                         if(sgn == 0)sgn = Mathf.Sign(hAxis);
                         float abVelX = sgn * vel.X;
-                        float dv = dt * (sgn * hAccel * hAxis - hDrag) * (cb.IsOnFloor() ? 1.0f : airHMultiplier);
+                        float dv = dt * (sgn * hAxis * hAccel + (sgn * hAxis - 1.0f) * hDrag) * (cb.IsOnFloor() ? 1.0f : airHMultiplier);
                         abVelX = Mathf.Clamp(abVelX + dv, 0, maxHSpeed);
                         vel.X = abVelX * sgn;
                     }
-                    counterEv.Emit(0);
-                    if(cb.IsOnFloor())wolfCounter.Rewind(wolfFrames);
-                    if(Input.IsActionJustPressed("ui_accept"))preCounter.Rewind(preFrames);
-                    if(!wolfCounter.elapsed && !preCounter.elapsed){
-                        wolfCounter.Rewind(0);
-                        preCounter.Rewind(0);
-                        jmpCounter.Rewind(jumpFrames);
+                    ++frameCounter;
+                    if(cb.IsOnFloor())wolfTill = frameCounter + wolfFrames;
+                    if(Input.IsActionJustPressed("ui_accept"))preTill = frameCounter + preFrames;
+                    if(frameCounter < wolfTill && frameCounter < preTill){
+                        wolfTill = preTill = 0;
+                        jumpTill = frameCounter + jumpFrames;
                         vel.Y = -jumpVVel;
                         vel.X += hAxis *jumpHVel;
                     }
-                    if(!Input.IsActionPressed("ui_accept"))jmpCounter.Rewind(0);
-                    vel.Y += dt * gravity * (jmpCounter.elapsed ? 1.0f : jumpGravityMultiplier);
+                    if(!Input.IsActionPressed("ui_accept"))jumpTill = 0;
+                    vel.Y += dt * gravity * (frameCounter < jumpTill ? jumpGravityMultiplier : 1.0f);
                     vel.Y = Mathf.Clamp(vel.Y, -Mathf.Inf, maxFallSpeed);
                     cb.Velocity = vel;
                     cb.MoveAndSlide();

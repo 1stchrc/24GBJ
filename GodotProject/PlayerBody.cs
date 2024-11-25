@@ -5,7 +5,7 @@ using Godot;
 
 
 namespace Fcc{
-    public static class PlayerSpirit{
+    public partial class PlayerBody : CharacterBody2D, ILevelObject{
         static float maxHSpeed => 500.0f;
         static float hAccel => 2000.0f;
         static float hDrag => 1500.0f;
@@ -18,14 +18,15 @@ namespace Fcc{
         static ulong jumpFrames => 12;
         static ulong wolfFrames => 6;
         static ulong preFrames => 6;
-        public static async void Possess(
-            CharacterBody2D bodyb, 
-            CharacterBody2D soulb, 
-            EventSrc<float> phu){
+
+        public async void FeedLevelInstance(TestLevel level){
+			
+			CharacterBody2D bodyb = this;
+			CharacterBody2D soulb = GD.Load<PackedScene>("res://PlayerSoul.tscn").Instantiate() as CharacterBody2D;
 
             CharacterBody2D cb = bodyb;
             CharacterBody2D bb = null;
-            soulb.GetParent().RemoveChild(soulb);
+
             bool isSoulForm = false;
 
             ulong frameCounter = 0;
@@ -33,7 +34,7 @@ namespace Fcc{
             ulong preTill = 0;
             ulong jumpTill = 0;
             for(;;){
-                float dt = await phu.Wait();
+                float dt = await level.physicsUpdate.Wait();
                 if(Input.IsActionJustPressed("soul_projection")){
                     if(!isSoulForm){
                         bodyb.GetParent().AddChild(soulb);
@@ -97,5 +98,6 @@ namespace Fcc{
                 }
             }
         }
+
     }
 }

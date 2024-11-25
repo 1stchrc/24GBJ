@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4nynk6ircoio"]
+
+[ext_resource type="Texture2D" uid="uid://csq3soiindg8o" path="res://testplayer.png" id="1_soiut"]
+[ext_resource type="Script" path="res://PlayerBody.cs" id="1_vk4vq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0lyi"]
+size = Vector2(32, 40)
+
+[node name="PlayerBody" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 4
+script = ExtResource("1_vk4vq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["PlayerBodyTouchActivater"]]
+shape = SubResource("RectangleShape2D_b0lyi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_soiut")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 40)

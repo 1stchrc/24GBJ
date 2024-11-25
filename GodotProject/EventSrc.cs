@@ -16,9 +16,6 @@ namespace Fcc{
         public EventSrcAwaiter Wait(){
             return new EventSrcAwaiter(this);
         }
-        public EventSrcCounterAwaiter Count(int count){
-            return new EventSrcCounterAwaiter(this, count);
-        }
         public class EventSrcAwaiter : INotifyCompletion{
             EventSrc<T> dsp;
             public bool IsCompleted => false;
@@ -38,53 +35,6 @@ namespace Fcc{
                 return this;
             }
         }
-
-        public class EventSrcCounterAwaiter : INotifyCompletion{
-            EventSrc<T> dsp;
-            public int count;
-            public bool IsCompleted => count <= 0;
-            bool discarded = false;
-            public async void OnCompleted(Action continuation){
-                while(!IsCompleted){
-                    await dsp.Wait();
-                    if(discarded)return;
-                    --count;
-                }
-                continuation();
-            }
-            public void GetResult(){}
-            internal EventSrcCounterAwaiter(EventSrc<T> ds, int c){
-                dsp = ds;
-                count = c;
-            }
-            public EventSrcCounterAwaiter GetAwaiter(){
-                return this;
-            }
-            public void Discard(){
-                discarded = true;
-            }
-        }
     }
-    public class EventCounter<T>{
-        public bool elapsed{get; private set;}
-        public int count => evCounterAw == null ? 0 : evCounterAw.count;
-        EventSrc<T> ev;
-        EventSrc<T>.EventSrcCounterAwaiter evCounterAw;
-        public void Rewind(int count){
-            elapsed = false;
-            evCounterAw?.Discard();
-            evCounterAw = ev.Count(count);
-            new Action(async () => {
-                await evCounterAw;
-                elapsed = true;
-            })();
-        }
-        public EventCounter(EventSrc<T> eventSrc){
-            ev = eventSrc;
-            evCounterAw = null;
-            elapsed = true;
-        }
-    }
-
 
 }

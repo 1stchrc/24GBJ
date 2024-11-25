@@ -10,14 +10,10 @@ public interface ILevelObject{
 
 public partial class TestLevel : Node2D{
 	[Export]
-	public CharacterBody2D playerBody;
-	[Export]
-	public CharacterBody2D playerSoul;
-	[Export]
 	public TileMapLayer mapSource;
 	[Export]
 	public Node2D gridBaseNode;
-	EventSrc<float> phu = new EventSrc<float>();
+	public EventSrc<float> physicsUpdate = new EventSrc<float>();
 	Dictionary<string, Action> events = new Dictionary<string, Action>();
 	public void EmitEvent(string eventName){
 		Action a;
@@ -43,12 +39,11 @@ public partial class TestLevel : Node2D{
 		foreach(var ch in GetChildren()){
 			if(ch is ILevelObject)(ch as ILevelObject).FeedLevelInstance(this);
 		}
-		PlayerSpirit.Possess(playerBody, playerSoul, phu);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta){
-		phu.Emit((float)delta);
+		physicsUpdate.Emit((float)delta);
 		
 	}
 }

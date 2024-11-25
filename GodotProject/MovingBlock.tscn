@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7fuhqpduvx84"]
+
+[ext_resource type="Script" path="res://MovingBlock.cs" id="1_x7w02"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ahmga"]
+size = Vector2(32, 32)
+
+[node name="MovingBlock" type="AnimatableBody2D"]
+collision_layer = 12
+collision_mask = 0
+script = ExtResource("1_x7w02")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ahmga")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+color = Color(0.278431, 0.384314, 0.54902, 1)

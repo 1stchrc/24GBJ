@@ -1,21 +1,16 @@
-[gd_scene load_steps=12 format=4 uid="uid://2t2i0lr3ckbe"]
+[gd_scene load_steps=8 format=4 uid="uid://2t2i0lr3ckbe"]
 
 [ext_resource type="Script" path="res://TestLevel.cs" id="1_0c4ed"]
 [ext_resource type="Texture2D" uid="uid://cixk3drwvd3fb" path="res://testtiles.png" id="2_ptaur"]
-[ext_resource type="Texture2D" uid="uid://3fhmpt6ns0cu" path="res://icon.svg" id="3_17250"]
-[ext_resource type="Texture2D" uid="uid://csq3soiindg8o" path="res://testplayer.png" id="3_cysif"]
-[ext_resource type="PackedScene" uid="uid://bpprd70j8rbrh" path="res://PinkTile.tscn" id="3_uvapg"]
-[ext_resource type="Script" path="res://TouchTriggerTag.cs" id="4_0qrs5"]
+[ext_resource type="PackedScene" uid="uid://c4nynk6ircoio" path="res://PlayerBody.tscn" id="3_yumnl"]
+[ext_resource type="PackedScene" uid="uid://c7fuhqpduvx84" path="res://MovingBlock.tscn" id="4_cn6uc"]
+[ext_resource type="PackedScene" uid="uid://c17f0wrak17lf" path="res://PressurePlate.tscn" id="5_qdmqi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q4q7h"]
 texture = ExtResource("2_ptaur")
 texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-1:0/0 = 0
 0:1/0 = 0
 0:1/0/custom_data_0 = "CyanTile.tscn"
-1:1/0 = 0
-1:1/0/custom_data_0 = "PinkTile.tscn"
 
 [sub_resource type="TileSet" id="TileSet_1ksua"]
 tile_size = Vector2i(32, 32)
@@ -23,179 +18,38 @@ custom_data_layer_0/name = ""
 custom_data_layer_0/type = 4
 sources/2 = SubResource("TileSetAtlasSource_q4q7h")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b35p0"]
-size = Vector2(32, 40)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_doj1p"]
-size = Vector2(32, 40)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_10y64"]
-size = Vector2(32, 32)
-
-[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("playerBody", "playerSoul", "mapSource", "gridBaseNode")]
+[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("mapSource", "gridBaseNode")]
 script = ExtResource("1_0c4ed")
-playerBody = NodePath("CharacterBody2D")
-playerSoul = NodePath("CharacterBody2D2")
 mapSource = NodePath("TileMapLayer")
 gridBaseNode = NodePath("Node2D")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(-1, 0)
-tile_map_data = PackedByteArray("AAAdAAAAAgAAAAEAAAAcAAAAAgAAAAEAAAAbAAAAAgAAAAEAAAAaAAAAAgAAAAEAAAAZAAAAAgAAAAEAAAAYAAAAAgAAAAEAAAAXAAAAAgAAAAEAAAAWAAAAAgAAAAEAAAAVAAAAAgAAAAEAAAAUAAAAAgAAAAEAAAATAAAAAgAAAAEAAAASAAAAAgAAAAEAAAARAAAAAgAAAAEAAAAQAAAAAgAAAAEAAAAPAAAAAgAAAAEAAAAOAAAAAgAAAAEAAAANAAAAAgAAAAEAAAAMAAAAAgAAAAEAAAALAAAAAgAAAAEAAAAKAAAAAgAAAAEAAAAJAAAAAgAAAAEAAAAIAAAAAgAAAAEAAAAHAAAAAgAAAAEAAAAGAAAAAgAAAAEAAAAFAAAAAgAAAAEAAAAEAAAAAgAAAAEAAAAEAAEAAgAAAAEAAAAEAAIAAgAAAAEAAAAEAAMAAgAAAAEAAAAEAAYAAgAAAAEAAAAEAAcAAgAAAAEAAAAEAAgAAgAAAAEAAAAEAAQAAgAAAAEAAAAEAAUAAgAAAAEAAAAEAAkAAgAAAAEAAAAEAAoAAgAAAAEAAAAEAAsAAgAAAAEAAAAEAAwAAgAAAAEAAAAEAA0AAgAAAAEAAAAEAA4AAgAAAAEAAAAEAA8AAgAAAAEAAAAEABAAAgAAAAEAAAAEABEAAgAAAAEAAAAeAAsAAgAAAAEAAAAeAAoAAgAAAAEAAAAeAAkAAgAAAAEAAAAeAAgAAgAAAAEAAAAeAAcAAgAAAAEAAAAeAAYAAgAAAAEAAAAeAAUAAgAAAAEAAAAeAAQAAgAAAAEAAAAeAAMAAgAAAAEAAAAeAAIAAgAAAAEAAAAeAAEAAgAAAAEAAAAeAAAAAgAAAAEAAAAEABIAAgAAAAEAAAAEABMAAgAAAAEAAAAFABMAAgAAAAEAAAAGABMAAgAAAAEAAAAHABMAAgAAAAEAAAAIABMAAgAAAAEAAAAJABMAAgAAAAEAAAAKABMAAgAAAAEAAAALABMAAgAAAAEAAAAMABMAAgAAAAEAAAANABMAAgAAAAEAAAAOABMAAgAAAAEAAAAPABMAAgAAAAEAAAAQABMAAgAAAAEAAAARABMAAgAAAAEAAAASABMAAgAAAAEAAAATABMAAgAAAAEAAAAUABMAAgAAAAEAAAAVABMAAgAAAAEAAAAWABMAAgAAAAEAAAAXABMAAgAAAAEAAAAYABMAAgAAAAEAAAAZABMAAgAAAAEAAAAaABMAAgAAAAEAAAAbABMAAgAAAAEAAAAcABMAAgAAAAEAAAAdABMAAgAAAAEAAAAeABMAAgAAAAEAAAAeAAwAAgABAAEAAAAeAA0AAgABAAEAAAAeAA4AAgABAAEAAAAeAA8AAgABAAEAAAAeABAAAgABAAEAAAAeABEAAgABAAEAAAAeABIAAgABAAEAAAAMAAgAAgAAAAEAAAAMAAkAAgAAAAEAAAAMAAoAAgAAAAEAAAAMAAsAAgAAAAEAAAAMAAwAAgAAAAEAAAAMAA0AAgAAAAEAAAAMAA4AAgAAAAEAAAAMAA8AAgAAAAEAAAAMABAAAgAAAAEAAAAJAAgAAgAAAAEAAAAJAAkAAgAAAAEAAAAJAAoAAgAAAAEAAAAJAAsAAgAAAAEAAAAJAAwAAgAAAAEAAAAJAA0AAgAAAAEAAAAJAA4AAgAAAAEAAAAJAA8AAgAAAAEAAAAJABAAAgAAAAEAAAAFABEAAgAAAAEAAAAIAA8AAgAAAAEAAAAFAA0AAgAAAAEAAAAIAAsAAgAAAAEAAAAFAAkAAgAAAAEAAAAIAAcAAgAAAAEAAAAJAAcAAgAAAAEAAAANAAgAAgAAAAEAAAAOAAgAAgAAAAEAAAA=")
+tile_map_data = PackedByteArray("AAAdAAAAAgAAAAEAAAAcAAAAAgAAAAEAAAAbAAAAAgAAAAEAAAAaAAAAAgAAAAEAAAAZAAAAAgAAAAEAAAAYAAAAAgAAAAEAAAAXAAAAAgAAAAEAAAAWAAAAAgAAAAEAAAAVAAAAAgAAAAEAAAAUAAAAAgAAAAEAAAATAAAAAgAAAAEAAAASAAAAAgAAAAEAAAARAAAAAgAAAAEAAAAQAAAAAgAAAAEAAAAPAAAAAgAAAAEAAAAOAAAAAgAAAAEAAAANAAAAAgAAAAEAAAAMAAAAAgAAAAEAAAALAAAAAgAAAAEAAAAKAAAAAgAAAAEAAAAJAAAAAgAAAAEAAAAIAAAAAgAAAAEAAAAHAAAAAgAAAAEAAAAGAAAAAgAAAAEAAAAFAAAAAgAAAAEAAAAEAAAAAgAAAAEAAAAEAAEAAgAAAAEAAAAEAAIAAgAAAAEAAAAEAAMAAgAAAAEAAAAEAAYAAgAAAAEAAAAEAAcAAgAAAAEAAAAEAAgAAgAAAAEAAAAEAAQAAgAAAAEAAAAEAAUAAgAAAAEAAAAEAAkAAgAAAAEAAAAEAAoAAgAAAAEAAAAEAAsAAgAAAAEAAAAEAAwAAgAAAAEAAAAEAA0AAgAAAAEAAAAEAA4AAgAAAAEAAAAEAA8AAgAAAAEAAAAEABAAAgAAAAEAAAAEABEAAgAAAAEAAAAeAAsAAgAAAAEAAAAeAAoAAgAAAAEAAAAeAAkAAgAAAAEAAAAeAAgAAgAAAAEAAAAeAAcAAgAAAAEAAAAeAAYAAgAAAAEAAAAeAAUAAgAAAAEAAAAeAAQAAgAAAAEAAAAeAAMAAgAAAAEAAAAeAAIAAgAAAAEAAAAeAAEAAgAAAAEAAAAeAAAAAgAAAAEAAAAEABIAAgAAAAEAAAAEABMAAgAAAAEAAAAFABMAAgAAAAEAAAAGABMAAgAAAAEAAAAHABMAAgAAAAEAAAAIABMAAgAAAAEAAAAJABMAAgAAAAEAAAAKABMAAgAAAAEAAAALABMAAgAAAAEAAAAMABMAAgAAAAEAAAANABMAAgAAAAEAAAAOABMAAgAAAAEAAAAPABMAAgAAAAEAAAAQABMAAgAAAAEAAAARABMAAgAAAAEAAAASABMAAgAAAAEAAAATABMAAgAAAAEAAAAUABMAAgAAAAEAAAAVABMAAgAAAAEAAAAWABMAAgAAAAEAAAAXABMAAgAAAAEAAAAYABMAAgAAAAEAAAAZABMAAgAAAAEAAAAaABMAAgAAAAEAAAAbABMAAgAAAAEAAAAcABMAAgAAAAEAAAAdABMAAgAAAAEAAAAeABMAAgAAAAEAAAAMAAgAAgAAAAEAAAAMAAkAAgAAAAEAAAAMAAoAAgAAAAEAAAAMAAsAAgAAAAEAAAAMAAwAAgAAAAEAAAAMAA0AAgAAAAEAAAAMAA4AAgAAAAEAAAAMAA8AAgAAAAEAAAAMABAAAgAAAAEAAAAJAAgAAgAAAAEAAAAJAAkAAgAAAAEAAAAJAAoAAgAAAAEAAAAJAAsAAgAAAAEAAAAJAAwAAgAAAAEAAAAJAA0AAgAAAAEAAAAJAA4AAgAAAAEAAAAJAA8AAgAAAAEAAAAJABAAAgAAAAEAAAAFABEAAgAAAAEAAAAIAA8AAgAAAAEAAAAFAA0AAgAAAAEAAAAIAAsAAgAAAAEAAAAFAAkAAgAAAAEAAAAIAAcAAgAAAAEAAAAJAAcAAgAAAAEAAAANAAgAAgAAAAEAAAAOAAgAAgAAAAEAAAA=")
 tile_set = SubResource("TileSet_1ksua")
+
+[node name="PlayerBody" parent="." instance=ExtResource("3_yumnl")]
+position = Vector2(551, 570)
+
+[node name="MovingBlock" parent="." node_paths=PackedStringArray("from", "to") instance=ExtResource("4_cn6uc")]
+position = Vector2(976, 496)
+scale = Vector2(1, 7)
+transitionTime = 2.0
+from = NodePath("../MoveFrom")
+to = NodePath("../MoveTo")
+toEvents = PackedStringArray("A")
+backEvents = PackedStringArray("~A")
+
+[node name="MoveFrom" type="Node2D" parent="."]
+position = Vector2(976, 496)
+
+[node name="MoveTo" type="Node2D" parent="."]
+position = Vector2(976, 272)
 
 [node name="Node2D" type="Node2D" parent="."]
 
-[node name="StaticBody2D" parent="." instance=ExtResource("3_uvapg")]
-position = Vector2(320, 256)
-scale = Vector2(2, 0.5)
-eventName = "Toggle1"
-onColor = Color(1, 0.498039, 0, 1)
-offColor = Color(1, 0.498039, 0, 0.498039)
-offCollisionLayer = 8
-
-[node name="StaticBody2D2" parent="." instance=ExtResource("3_uvapg")]
-position = Vector2(480, 256)
-scale = Vector2(8, 0.5)
-eventName = "Toggle0"
-
-[node name="StaticBody2D3" parent="." instance=ExtResource("3_uvapg")]
-position = Vector2(480, 320)
-scale = Vector2(8, 0.5)
-eventName = "Toggle0"
-activated = false
-
-[node name="StaticBody2D4" parent="." instance=ExtResource("3_uvapg")]
-position = Vector2(480, 384)
-scale = Vector2(8, 0.5)
-eventName = "Toggle0"
-
-[node name="StaticBody2D5" parent="." instance=ExtResource("3_uvapg")]
-position = Vector2(480, 448)
-scale = Vector2(8, 0.5)
-eventName = "Toggle0"
-activated = false
-
-[node name="StaticBody2D6" parent="." instance=ExtResource("3_uvapg")]
-position = Vector2(320, 320)
-scale = Vector2(2, 0.5)
-eventName = "Toggle2"
-onColor = Color(1, 0, 0, 1)
-offColor = Color(1, 0, 0, 0.498039)
-offCollisionLayer = 8
-
-[node name="StaticBody2D7" parent="." instance=ExtResource("3_uvapg")]
-position = Vector2(320, 512)
-scale = Vector2(2, 0.5)
-eventName = "Toggle2"
-onColor = Color(1, 0, 0, 1)
-offColor = Color(1, 0, 0, 0.498039)
-offCollisionLayer = 8
-activated = false
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(564, 586)
-collision_layer = 3
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" groups=["PlayerBodyTouchActivater"]]
-shape = SubResource("RectangleShape2D_b35p0")
-
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-texture = ExtResource("3_cysif")
-region_enabled = true
-region_rect = Rect2(0, 0, 32, 40)
-
-[node name="CharacterBody2D2" type="CharacterBody2D" parent="."]
-collision_layer = 2
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D2" groups=["PlayerSoulTouchActivater"]]
-shape = SubResource("RectangleShape2D_doj1p")
-
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D2"]
-modulate = Color(0.211765, 0.2, 0.0156863, 0.521569)
-texture = ExtResource("3_cysif")
-region_enabled = true
-region_rect = Rect2(0, 0, 32, 40)
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(713, 227)
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("4_0qrs5")
-eventNames = PackedStringArray("Toggle0", "Toggle1")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_10y64")
-
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-modulate = Color(1, 0.498039, 0, 0.666667)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("3_17250")
-
-[node name="Area2D2" type="Area2D" parent="."]
-position = Vector2(350, 296)
-collision_layer = 0
-script = ExtResource("4_0qrs5")
-eventNames = PackedStringArray("PinkToggle")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
-shape = SubResource("RectangleShape2D_10y64")
-
-[node name="Sprite2D" type="Sprite2D" parent="Area2D2"]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("3_17250")
-
-[node name="Area2D3" type="Area2D" parent="."]
-position = Vector2(650, 298)
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("4_0qrs5")
-eventNames = PackedStringArray("Toggle0", "Toggle4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
-shape = SubResource("RectangleShape2D_10y64")
-
-[node name="Sprite2D" type="Sprite2D" parent="Area2D3"]
-modulate = Color(0.666667, 0.756863, 1, 0.666667)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("3_17250")
-
-[node name="Area2D4" type="Area2D" parent="."]
-position = Vector2(560, 360)
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("4_0qrs5")
-eventNames = PackedStringArray("Toggle0", "Toggle2")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4"]
-shape = SubResource("RectangleShape2D_10y64")
-
-[node name="Sprite2D" type="Sprite2D" parent="Area2D4"]
-modulate = Color(1, 0, 0, 0.666667)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("3_17250")
-
-[node name="Area2D5" type="Area2D" parent="."]
-position = Vector2(500, 427)
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("4_0qrs5")
-eventNames = PackedStringArray("Toggle0", "Toggle3")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D5"]
-shape = SubResource("RectangleShape2D_10y64")
-
-[node name="Sprite2D" type="Sprite2D" parent="Area2D5"]
-modulate = Color(0.666667, 0.756863, 1, 0.666667)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("3_17250")
-
-[node name="StaticBody2D8" parent="." instance=ExtResource("3_uvapg")]
-position = Vector2(320, 384)
-scale = Vector2(2, 0.5)
-eventName = "Toggle3"
-onColor = Color(0, 1, 0, 1)
-offColor = Color(0, 1, 0, 0.498039)
-offCollisionLayer = 8
+[node name="PressurePlate" parent="." instance=ExtResource("5_qdmqi")]
+position = Vector2(720, 608)
+scale = Vector2(2, 1)
+enterEvent = "A"
+exitEvent = "~A"

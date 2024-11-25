@@ -20,9 +20,6 @@ public partial class MovingBlock : AnimatableBody2D, ILevelObject{
 	bool isTo = false;
 	ulong animIteration = 0;
 
-	async void beginTransition(Node2D from, Node2D to, ulong ait, EventSrc<float> phu){
-		
-	}
     public void FeedLevelInstance(TestLevel level){
 		Transform = new Transform2D(Transform.X, Transform.Y, (isTo ? to : from).Transform.Origin);
         foreach(var e in toEvents){

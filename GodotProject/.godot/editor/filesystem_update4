@@ -1,9 +1,0 @@
-res://testLevel.tscn
-res://PlayerBody.cs
-res://TestLevel.cs
-res://ToggleTile.cs
-res://TouchTriggerTag.cs
-res://PressurePlate.tscn
-res://MovingBlock.tscn
-res://PressurePlate.cs
-res://MovingBlock.cs

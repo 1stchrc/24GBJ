@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7fuhqpduvx84"]
 
-[ext_resource type="Script" path="res://MovingBlock.cs" id="1_x7w02"]
+[ext_resource type="Script" path="res://Scripts/MovingBlock.cs" id="1_x7w02"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ahmga"]
 size = Vector2(32, 32)

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyn1hvxkqotvn"]
+
+[ext_resource type="Script" path="res://Scripts/Spike.cs" id="1_yueqj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3uv3m"]
+size = Vector2(32, 8)
+
+[node name="Spike" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_yueqj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 28)
+shape = SubResource("RectangleShape2D_3uv3m")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_top = 24.0
+offset_right = 32.0
+offset_bottom = 32.0
+color = Color(1, 0, 0.498039, 1)

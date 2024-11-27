@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://c41wievy5a4s6"]
+
+[ext_resource type="Script" path="res://Scripts/Player/PlayerSoul.cs" id="1_mpgqv"]
+[ext_resource type="Texture2D" uid="uid://csq3soiindg8o" path="res://testplayer.png" id="2_i6tbk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ac8bs"]
+size = Vector2(32, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fw8ek"]
+size = Vector2(32, 40)
+
+[node name="PlayerSoul" type="CharacterBody2D" node_paths=PackedStringArray("possessArea")]
+collision_layer = 2
+collision_mask = 8
+script = ExtResource("1_mpgqv")
+possessArea = NodePath("Area2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["PlayerBodyTouchActivater"]]
+shape = SubResource("RectangleShape2D_ac8bs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.643137, 0.254902, 0.109804, 0.498039)
+texture = ExtResource("2_i6tbk")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 40)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_fw8ek")

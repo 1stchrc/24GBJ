@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2ctfix2acgoi"]
+
+[ext_resource type="Script" path="res://Scripts/Robot.cs" id="1_jljor"]
+[ext_resource type="Texture2D" uid="uid://csq3soiindg8o" path="res://testplayer.png" id="2_otnpi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oan0r"]
+size = Vector2(32, 40)
+
+[node name="Robot" type="CharacterBody2D"]
+collision_mask = 4
+script = ExtResource("1_jljor")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_oan0r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+texture = ExtResource("2_otnpi")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 40)

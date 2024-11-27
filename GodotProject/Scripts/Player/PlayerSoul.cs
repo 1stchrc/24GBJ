@@ -143,95 +143,92 @@ namespace Fcc{
                 }
                 if(Input.IsActionJustPressed("transfer")){
                     if(storedObject == null){
-                        storedObject = await new Func<Task<ITransferrable>>(async () => {
-                            Area2D mark = GD.Load<PackedScene>("res://Scenes/Objects/TransferMark.tscn").Instantiate<Area2D>();
-                            mark.Position = GlobalPosition;
-                            level.CallDeferred(Node.MethodName.AddChild, mark);
-                            ITransferrable ret = null;
-                            for(;;){
-                                var bs = mark.GetOverlappingBodies();
-                                if(bs.Count != 0)
-                                    foreach(var b in bs){
-                                        if(b is ITransferrable){
-                                            if(ret == b)break;
-                                            if(ret != null)(ret as CanvasItem).Modulate = new Color("#ffffff", 1.0f);
-                                            ret = b as ITransferrable;
-                                            (ret as CanvasItem).Modulate = new Color("#7fffff", 1.0f);
-                                            break;
-                                        }
+                        Area2D mark = GD.Load<PackedScene>("res://Scenes/Objects/TransferMark.tscn").Instantiate<Area2D>();
+                        mark.Position = GlobalPosition;
+                        level.CallDeferred(Node.MethodName.AddChild, mark);
+                        for(;;){
+                            var bs = mark.GetOverlappingBodies();
+                            if(bs.Count != 0)
+                                foreach(var b in bs){
+                                    if(b is ITransferrable){
+                                        if(storedObject == b)break;
+                                        if(storedObject != null)(storedObject as CanvasItem).Modulate = new Color("#ffffff", 1.0f);
+                                        storedObject = b as ITransferrable;
+                                        (storedObject as CanvasItem).Modulate = new Color("#7fffff", 1.0f);
+                                        break;
                                     }
-                                else{
-                                    if(ret != null)(ret as CanvasItem).Modulate = new Color("#ffffff", 1.0f);
-                                    ret = null;
                                 }
-                                if(Input.IsActionJustReleased("transfer")){
-                                    mark.CallDeferred(Node.MethodName.Free);
-                                    if(ret == null)return null;
-                                    (ret as CanvasItem).Modulate = new Color("#ffffff", 1.0f);
-                                    (ret as Node).GetParent().CallDeferred(Node.MethodName.RemoveChild, ret as Node);
-                                    level.UI.TransferSlot.CallDeferred(Node.MethodName.AddChild, ret as Node);
-                                    (ret as Node2D).Position = Vector2.Zero;
-                                    ret.Store();
-                                    return ret;
-                                }
-                                PlayerIdle(dt);
-                                dt = await level.physicsUpdate.Wait();
-                                ++frameCounter;
-                                Vector2 v = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-                                mark.Translate(v * dt * 400.0f);
-                                Vector2 dis = mark.Position - GlobalPosition;
-                                if(dis.LengthSquared() > 128.0f * 128.0f){
-                                    mark.Position = GlobalPosition + dis.Normalized() * 128.0f;
-                                }
+                            else{
+                                if(storedObject != null)(storedObject as CanvasItem).Modulate = new Color("#ffffff", 1.0f);
+                                storedObject = null;
                             }
-                        })();
-                    }else{
-                        await new Func<Task>(async () => {
-                            Area2D detectArea = new Area2D();
-                            var sm = new ShaderMaterial();{
-                                ColorRect cr = new ColorRect();
-                                cr.SetSize(Vector2.One * 64.0f);
-                                var lm = level.UI.TransferRender.Material as ShaderMaterial;
+                            if(Input.IsActionJustReleased("transfer")){
+                                mark.CallDeferred(Node.MethodName.Free);
+                                if(storedObject == null)break;
+                                if(cb == storedObject)Project();
+                                (storedObject as CanvasItem).Modulate = new Color("#ffffff", 1.0f);
+                                (storedObject as Node).GetParent().CallDeferred(Node.MethodName.RemoveChild, storedObject as Node);
+                                level.UI.TransferSlot.CallDeferred(Node.MethodName.AddChild, storedObject as Node);
+                                (storedObject as Node2D).Position = Vector2.Zero;
                                 
-                                sm.Shader = GD.Load<Shader>("res://Shaders/TransferIndicater.gdshader");
-                                sm.SetShaderParameter("subv", lm.GetShaderParameter("subv"));
-                                sm.SetShaderParameter("modu", new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
-                                cr.Material = sm;
-                                cr.Position = -cr.Size / 2.0f;
-                                detectArea.AddChild(cr);
-                                var shape = new CollisionShape2D();
-                                shape.Shape = storedObject.GetRequiredSpace();
-                                detectArea.AddChild(shape);
-                                detectArea.Position = GlobalPosition;
-                                detectArea.CollisionMask = 4;
+                                storedObject.Store();
+                                break;
                             }
-                            level.CallDeferred(Node.MethodName.AddChild, detectArea);
+                            PlayerIdle(dt);
+                            dt = await level.physicsUpdate.Wait();
+                            ++frameCounter;
+                            Vector2 v = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+                            mark.Translate(v * dt * 400.0f);
+                            Vector2 dis = mark.Position - GlobalPosition;
+                            if(dis.LengthSquared() > 72.0f * 72.0f){
+                                mark.Position = GlobalPosition + dis.Normalized() * 72.0f;
+                            }
+                        }
+                    }else{
+                        Area2D detectArea = new Area2D();
+                        var sm = new ShaderMaterial();{
+                            ColorRect cr = new ColorRect();
+                            cr.SetSize(Vector2.One * 64.0f);
+                            var lm = level.UI.TransferRender.Material as ShaderMaterial;
                             
-                            for(;;){
-                                sm.SetShaderParameter("modu", detectArea.HasOverlappingBodies() ? 
-                                new Vector4(1.0f, 0.3f, 0.3f, 1.0f) : new Vector4(0.3f, 1.0f, 0.3f, 1.0f));
-                                if(Input.IsActionJustReleased("transfer")){
-                                    if(!detectArea.HasOverlappingBodies()){
-                                        level.UI.TransferSlot.CallDeferred(Node.MethodName.RemoveChild, storedObject as Node);
-                                        (storedObject as Node2D).Position = detectArea.Position;
-                                        level.CallDeferred(Node.MethodName.AddChild, storedObject as Node);
-                                        storedObject.Unstore();
-                                        storedObject = null;
-                                    }
-                                    detectArea.CallDeferred(Node.MethodName.Free);
-                                    return;
+                            sm.Shader = GD.Load<Shader>("res://Shaders/TransferIndicater.gdshader");
+                            sm.SetShaderParameter("subv", lm.GetShaderParameter("subv"));
+                            sm.SetShaderParameter("modu", new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+                            cr.Material = sm;
+                            cr.Position = -cr.Size / 2.0f;
+                            detectArea.AddChild(cr);
+                            var shape = new CollisionShape2D();
+                            shape.Shape = storedObject.GetRequiredSpace();
+                            detectArea.AddChild(shape);
+                            detectArea.Position = GlobalPosition;
+                            detectArea.CollisionMask = 4;
+                        }
+                        level.CallDeferred(Node.MethodName.AddChild, detectArea);
+                        
+                        for(;;){
+                            sm.SetShaderParameter("modu", detectArea.HasOverlappingBodies() ? 
+                            new Vector4(1.0f, 0.3f, 0.3f, 1.0f) : new Vector4(0.3f, 1.0f, 0.3f, 1.0f));
+                            if(Input.IsActionJustReleased("transfer")){
+                                if(!detectArea.HasOverlappingBodies()){
+                                    level.UI.TransferSlot.CallDeferred(Node.MethodName.RemoveChild, storedObject as Node);
+                                    (storedObject as Node2D).Position = detectArea.Position;
+                                    level.CallDeferred(Node.MethodName.AddChild, storedObject as Node);
+                                    storedObject.Unstore();
+                                    storedObject = null;
                                 }
-                                PlayerIdle(dt);
-                                dt = await level.physicsUpdate.Wait();
-                                ++frameCounter;
-                                Vector2 v = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-                                detectArea.Position = detectArea.Position + v * dt * 400.0f;
-                                Vector2 dis = detectArea.Position - GlobalPosition;
-                                if(dis.LengthSquared() > 128.0f * 128.0f){
-                                    detectArea.Position = GlobalPosition + dis.Normalized() * 128.0f;
-                                }
+                                detectArea.CallDeferred(Node.MethodName.Free);
+                                break;
                             }
-                        })();
+                            PlayerIdle(dt);
+                            dt = await level.physicsUpdate.Wait();
+                            ++frameCounter;
+                            Vector2 v = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+                            detectArea.Position = detectArea.Position + v * dt * 400.0f;
+                            Vector2 dis = detectArea.Position - GlobalPosition;
+                            if(dis.LengthSquared() > 72.0f * 72.0f){
+                                detectArea.Position = GlobalPosition + dis.Normalized() * 72.0f;
+                            }
+                        }
                     }
                 }
                 PlayerMove(dt);

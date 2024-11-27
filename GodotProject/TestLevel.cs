@@ -12,6 +12,7 @@ public partial class TestLevel : Node2D{
 	public EventSrc<float> physicsUpdate = new EventSrc<float>();
 	public EventSrc<string> eventEvent = new EventSrc<string>();
 	Dictionary<string, Action> events = new Dictionary<string, Action>();
+	public InLevelUI UI;
 	public void EmitEvent(string eventName){
 		eventEvent.Emit(eventName);
 		Action a;
@@ -42,6 +43,8 @@ public partial class TestLevel : Node2D{
 		}
 	}
 	public override void _Ready(){
+		UI = GD.Load<PackedScene>("res://Scenes/UI/InLevelUI.tscn").Instantiate<InLevelUI>();
+		CallDeferred(MethodName.AddChild, UI);
 		dfsChildren(this);
 	}
 	public override void _PhysicsProcess(double delta){

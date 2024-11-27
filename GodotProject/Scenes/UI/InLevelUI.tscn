@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwdde60hk2ifv"]
+
+[ext_resource type="Script" path="res://Scripts/UI/InLevelUI.cs" id="1_tn5ey"]
+[ext_resource type="Shader" path="res://Shaders/TransferSlot.gdshader" id="2_sm50u"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_k3hev"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f2bnr"]
+resource_local_to_scene = true
+shader = ExtResource("2_sm50u")
+shader_parameter/subv = SubResource("ViewportTexture_k3hev")
+
+[node name="InLevelUi" type="CanvasLayer" node_paths=PackedStringArray("TransferSlot", "TransferRender")]
+follow_viewport_enabled = true
+script = ExtResource("1_tn5ey")
+TransferSlot = NodePath("SubViewport")
+TransferRender = NodePath("ColorRect")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_f2bnr")
+offset_left = 1078.0
+offset_top = 11.0
+offset_right = 1142.0
+offset_bottom = 75.0
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(64, 64)
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport"]

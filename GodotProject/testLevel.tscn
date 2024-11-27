@@ -28,7 +28,7 @@ script = ExtResource("1_0c4ed")
 [node name="MovingBlock" parent="." node_paths=PackedStringArray("to") instance=ExtResource("4_cn6uc")]
 position = Vector2(976, 496)
 scale = Vector2(1, 7)
-transitionTime = 1.0
+transitionTime = 0.3
 to = NodePath("MoveTo")
 toEvents = PackedStringArray("A")
 backEvents = PackedStringArray("~A")

@@ -7,7 +7,7 @@ public partial class PressurePlate : Node2D, ILevelObject{
 	[Export]
 	public string exitEvent;
 	int bCount;
-	public void FeedLevelInstance(TestLevel level){
+	public void FeedLevelInstance(GeneralLevel level){
 		Area2D detectArea = GetChild<Area2D>(0);
 		detectArea.GlobalScale = new Vector2(detectArea.GlobalScale.X, 1.0f);
 		ColorRect renderer = GetChild<ColorRect>(2);

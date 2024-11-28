@@ -16,7 +16,7 @@ public partial class ToggleTile : StaticBody2D, ILevelObject{
 	public uint offCollisionLayer;
 	[Export]
 	public bool activated = true;
-    public void FeedLevelInstance(TestLevel level){
+	public void FeedLevelInstance(GeneralLevel level){
 		if(activated){
 			CollisionLayer = onCollisionLayer;
 			cr.Color = onColor;
@@ -34,6 +34,6 @@ public partial class ToggleTile : StaticBody2D, ILevelObject{
 				cr.Color = offColor;
 			}
 		});
-    }
+	}
 
 }

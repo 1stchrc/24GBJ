@@ -18,7 +18,7 @@ public partial class MovingBlock : AnimatableBody2D, ILevelObject{
 	bool isTo = false;
 	ulong animIteration = 0;
 
-    public async void FeedLevelInstance(TestLevel level){
+	public async void FeedLevelInstance(GeneralLevel level){
 		Vector2 fromOrigin = Transform.Origin;
 		Vector2 toOrigin = to.GlobalPosition - (GetParent() as Node2D).GlobalPosition;
 		HashSet<string> toSet = new HashSet<string>(toEvents);
@@ -59,5 +59,5 @@ public partial class MovingBlock : AnimatableBody2D, ILevelObject{
 				})(++animIteration);
 			}
 		}
-    }
+	}
 }

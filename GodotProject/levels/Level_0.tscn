@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://dvm3vugv0kx1q"]
+[gd_scene load_steps=12 format=4 uid="uid://dvm3vugv0kx1q"]
 
 [ext_resource type="Script" path="res://levels/GeneralLevel.cs" id="1_0c4ed"]
 [ext_resource type="Texture2D" uid="uid://cixk3drwvd3fb" path="res://testtiles.png" id="2_ptaur"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c17f0wrak17lf" path="res://Scenes/Objects/PressurePlate.tscn" id="5_qdmqi"]
 [ext_resource type="PackedScene" uid="uid://d2ctfix2acgoi" path="res://Scenes/Objects/Robot.tscn" id="6_u81uk"]
 [ext_resource type="PackedScene" uid="uid://byxumq35exirc" path="res://Scenes/Objects/Exit.tscn" id="8_7m46e"]
+[ext_resource type="PackedScene" uid="uid://djgmqctpcexjv" path="res://Scenes/Objects/Fragile.tscn" id="9_uecci"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hg2dd"]
 texture = ExtResource("2_ptaur")
@@ -83,3 +84,6 @@ position = Vector2(176, 224)
 
 [node name="Exit" parent="." instance=ExtResource("8_7m46e")]
 position = Vector2(831, 416)
+
+[node name="Fragile" parent="." instance=ExtResource("9_uecci")]
+position = Vector2(29, 203)

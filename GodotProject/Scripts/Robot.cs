@@ -26,6 +26,8 @@ namespace Fcc{
 			
 		}
 		public async void FeedLevelInstance(GeneralLevel lev){
+			Area2D breaker = GetChild<Area2D>(1);
+			breaker.BodyEntered += b => b.CallDeferred(MethodName.Free);
 			for(;;){
 				float dt = await lev.physicsUpdate.Wait();
 				if(discarded)return;

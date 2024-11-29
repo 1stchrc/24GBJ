@@ -91,3 +91,4 @@ position = Vector2(29, 203)
 
 [node name="StorableBlock" parent="." instance=ExtResource("10_pmjmj")]
 position = Vector2(92, 185)
+scale = Vector2(1.64, 1)

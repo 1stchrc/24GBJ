@@ -200,6 +200,7 @@ namespace Fcc{
 							detectArea.AddChild(cr);
 							var shape = new CollisionShape2D();
 							shape.Shape = storedObject.GetRequiredSpace();
+							shape.Scale = (storedObject as Node2D).GlobalScale;
 							detectArea.AddChild(shape);
 							detectArea.Position = GlobalPosition;
 							detectArea.CollisionMask = storedObject.RequiredLayer;

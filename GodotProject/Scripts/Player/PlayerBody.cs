@@ -29,6 +29,7 @@ namespace Fcc{
 		public async void FeedLevelInstance(GeneralLevel level){
 			possessed = true;
 			soul.Init(this, level);
+			Area2D endDetect = GetChild<Area2D>(1);
 			for(;;){
 				float dt = await level.physicsUpdate.Wait();
 				if(!possessed){
@@ -41,6 +42,10 @@ namespace Fcc{
 					vel.Y += dt * PlayerSoul.gravity;
 					Velocity = vel;
 					MoveAndSlide();
+				}
+				if(possessed && soul.canOperate && endDetect.HasOverlappingAreas()){
+					soul.canOperate = false;
+					GD.Print("Congratulations");
 				}
 			}
 		}

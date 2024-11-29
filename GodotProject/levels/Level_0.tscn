@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://dvm3vugv0kx1q"]
+[gd_scene load_steps=11 format=4 uid="uid://dvm3vugv0kx1q"]
 
 [ext_resource type="Script" path="res://levels/GeneralLevel.cs" id="1_0c4ed"]
 [ext_resource type="Texture2D" uid="uid://cixk3drwvd3fb" path="res://testtiles.png" id="2_ptaur"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c7fuhqpduvx84" path="res://Scenes/Objects/MovingBlock.tscn" id="4_cn6uc"]
 [ext_resource type="PackedScene" uid="uid://c17f0wrak17lf" path="res://Scenes/Objects/PressurePlate.tscn" id="5_qdmqi"]
 [ext_resource type="PackedScene" uid="uid://d2ctfix2acgoi" path="res://Scenes/Objects/Robot.tscn" id="6_u81uk"]
+[ext_resource type="PackedScene" uid="uid://byxumq35exirc" path="res://Scenes/Objects/Exit.tscn" id="8_7m46e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hg2dd"]
 texture = ExtResource("2_ptaur")
@@ -53,6 +54,7 @@ scale = Vector2(1, 0.142857)
 
 [node name="PlayerBody" parent="." instance=ExtResource("3_yumnl")]
 position = Vector2(134, 225)
+platform_floor_layers = 4294901764
 
 [node name="PressurePlate" parent="." instance=ExtResource("5_qdmqi")]
 position = Vector2(256, 256)
@@ -78,3 +80,6 @@ position = Vector2(80, -816)
 
 [node name="Robot" parent="." instance=ExtResource("6_u81uk")]
 position = Vector2(176, 224)
+
+[node name="Exit" parent="." instance=ExtResource("8_7m46e")]
+position = Vector2(831, 416)

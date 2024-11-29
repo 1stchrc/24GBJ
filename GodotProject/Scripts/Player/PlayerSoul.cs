@@ -9,6 +9,7 @@ namespace Fcc{
 
 	public interface ITransferrable{
 		public Shape2D GetRequiredSpace();
+		public uint RequiredLayer{get;}
 		public void Store();
 		public void Unstore();
 	}
@@ -154,7 +155,7 @@ namespace Fcc{
 										if(storedObject == b)break;
 										if(storedObject != null)(storedObject as CanvasItem).Modulate = new Color("#ffffff", 1.0f);
 										storedObject = b as ITransferrable;
-										(storedObject as CanvasItem).Modulate = new Color("#7fffff", 1.0f);
+										(storedObject as CanvasItem).Modulate = new Color("#007fff", 1.0f);
 										break;
 									}
 								}
@@ -201,7 +202,7 @@ namespace Fcc{
 							shape.Shape = storedObject.GetRequiredSpace();
 							detectArea.AddChild(shape);
 							detectArea.Position = GlobalPosition;
-							detectArea.CollisionMask = 4;
+							detectArea.CollisionMask = storedObject.RequiredLayer;
 						}
 						level.CallDeferred(Node.MethodName.AddChild, detectArea);
 						

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://csq3soiindg8o" path="res://testplayer.png" id="1_soiut"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0lyi"]
-size = Vector2(30, 40)
+size = Vector2(32, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2efim"]
 size = Vector2(32, 40)

@@ -10,6 +10,7 @@ namespace Fcc{
 		PlayerSoul soul = null;
 		bool discarded = false;
 		bool stored = false;
+		public uint RequiredLayer => 4;
 		public void Possess(PlayerSoul ps){
 			soul = ps;
 		}

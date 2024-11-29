@@ -43,9 +43,14 @@ namespace Fcc{
 					Velocity = vel;
 					MoveAndSlide();
 				}
-				if(possessed && soul.canOperate && endDetect.HasOverlappingAreas()){
-					soul.canOperate = false;
-					GD.Print("Congratulations");
+				if(possessed && soul.canOperate ){
+					var arr = endDetect.GetOverlappingAreas();
+					if(arr.Count != 0){
+						soul.canOperate = false;
+						GD.Print("Congratulations");
+						var exitNode = arr[0];
+						exitNode.GetChild<AnimatedSprite2D>(1).Play("open");
+					}
 				}
 			}
 		}

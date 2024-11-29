@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ctbgk3ausfe30"]
 
-[ext_resource type="Script" path="res://Scenes/Objects/StorableBlock.cs" id="1_hn1iw"]
+[ext_resource type="Script" path="res://Scripts/StorableBlock.cs" id="1_hn1iw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lamse"]
 size = Vector2(32, 32)

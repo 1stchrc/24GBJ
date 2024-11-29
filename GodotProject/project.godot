@@ -26,6 +26,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="24GBJ"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/AS2P/plugin.cfg")
+
 [input]
 
 ui_left={

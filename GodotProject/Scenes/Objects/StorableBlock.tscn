@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctbgk3ausfe30"]
+
+[ext_resource type="Script" path="res://Scripts/StorableBlock.cs" id="1_hn1iw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lamse"]
+size = Vector2(32, 32)
+
+[node name="StorableBlock" type="StaticBody2D"]
+collision_layer = 13
+collision_mask = 0
+script = ExtResource("1_hn1iw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lamse")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+color = Color(0.282353, 1, 0.580392, 1)

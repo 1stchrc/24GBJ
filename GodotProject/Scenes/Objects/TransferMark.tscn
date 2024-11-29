@@ -4,6 +4,7 @@
 radius = 1.0
 
 [node name="TransferMark" type="Area2D"]
+collision_layer = 0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -8.0

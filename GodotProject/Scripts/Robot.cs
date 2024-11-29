@@ -10,6 +10,7 @@ namespace Fcc{
 		PlayerSoul soul = null;
 		bool discarded = false;
 		bool stored = false;
+		public uint RequiredLayer => 4;
 		public void Possess(PlayerSoul ps){
 			soul = ps;
 		}
@@ -26,6 +27,8 @@ namespace Fcc{
 			
 		}
 		public async void FeedLevelInstance(GeneralLevel lev){
+			Area2D breaker = GetChild<Area2D>(1);
+			breaker.BodyEntered += b => b.CallDeferred(MethodName.Free);
 			for(;;){
 				float dt = await lev.physicsUpdate.Wait();
 				if(discarded)return;

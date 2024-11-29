@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c17f0wrak17lf"]
 
-[ext_resource type="Script" path="res://PressurePlate.cs" id="1_2eghf"]
+[ext_resource type="Script" path="res://Scripts/PressurePlate.cs" id="1_2eghf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t13ur"]
 size = Vector2(32, 4)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://c4nynk6ircoio"]
+[gd_scene load_steps=48 format=3 uid="uid://c4nynk6ircoio"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerBody.cs" id="1_orgva"]
 [ext_resource type="Texture2D" uid="uid://dutpbcia821sg" path="res://resource/player/die.png" id="2_jjgkn"]
@@ -76,10 +76,6 @@ region = Rect2(960, 0, 64, 101)
 [sub_resource type="AtlasTexture" id="AtlasTexture_tpn1n"]
 atlas = ExtResource("2_jjgkn")
 region = Rect2(1024, 0, 64, 101)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yac0o"]
-atlas = ExtResource("3_1cum3")
-region = Rect2(256, 0, 64, 105)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tqp01"]
 atlas = ExtResource("3_1cum3")
@@ -229,9 +225,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yac0o")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_tqp01")
 }],
 "loop": true,
@@ -343,7 +336,7 @@ shape = SubResource("RectangleShape2D_u583n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_y2nja")
-animation = &"land"
+animation = &"hover"
 autoplay = "idle"
 
 [node name="SpineDetector" type="Area2D" parent="."]

@@ -33,6 +33,7 @@ namespace Fcc{
 			possessed = true;
 			soul.Init(this, level);
 			Area2D endDetect = GetChild<Area2D>(1);
+			GetChild<Area2D>(3).BodyEntered += _ => Kill();
 			for(;;){
 				float dt = await level.physicsUpdate.Wait();
 				if(!possessed){

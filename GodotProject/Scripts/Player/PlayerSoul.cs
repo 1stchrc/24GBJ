@@ -45,6 +45,8 @@ namespace Fcc{
 		ulong preTill = 0;
 		ulong jumpTill = 0;
 		ulong jumpTurnTill = 0;
+		[Export]
+		float storeRadius = 144.0f;
 		public void Kill(){
 			if(!canOperate)return;
 			canOperate = false;
@@ -181,8 +183,8 @@ namespace Fcc{
 							Vector2 v = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 							mark.Translate(v * dt * 400.0f);
 							Vector2 dis = mark.Position - GlobalPosition;
-							if(dis.LengthSquared() > 72.0f * 72.0f){
-								mark.Position = GlobalPosition + dis.Normalized() * 72.0f;
+							if(dis.LengthSquared() > storeRadius*storeRadius){
+								mark.Position = GlobalPosition + dis.Normalized() * storeRadius;
 							}
 						}
 					}else{
@@ -227,8 +229,8 @@ namespace Fcc{
 							Vector2 v = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 							detectArea.Position = detectArea.Position + v * dt * 400.0f;
 							Vector2 dis = detectArea.Position - GlobalPosition;
-							if(dis.LengthSquared() > 72.0f * 72.0f){
-								detectArea.Position = GlobalPosition + dis.Normalized() * 72.0f;
+							if(dis.LengthSquared() > storeRadius * storeRadius){
+								detectArea.Position = GlobalPosition + dis.Normalized() * storeRadius;
 							}
 						}
 					}

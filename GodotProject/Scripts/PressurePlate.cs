@@ -12,12 +12,12 @@ public partial class PressurePlate : Node2D, ILevelObject{
 		Area2D exitArea = GetChild<Area2D>(1);
 		enterArea.GlobalScale = new Vector2(enterArea.GlobalScale.X, 1.0f);
 		exitArea.GlobalScale = new Vector2(exitArea.GlobalScale.X, 1.0f);
-		ColorRect renderer = GetChild<ColorRect>(2);
+		AnimatedSprite2D renderer = GetChild<AnimatedSprite2D>(2);
 		bs = new HashSet<Node2D>(enterArea.GetOverlappingBodies());
 		if(bs.Count != 0)level.EmitEvent(enterEvent);
 		enterArea.BodyEntered += b => {
 			if(bs.Count == 0){
-				renderer.Color = new Color("#acda73", 1.0f);
+				renderer.Play("pushed");
 				level.EmitEvent(enterEvent);
 			}
 			bs.Add(b);
@@ -25,7 +25,7 @@ public partial class PressurePlate : Node2D, ILevelObject{
 		exitArea.BodyExited += b => {
 			bs.Remove(b);
 			if(bs.Count == 0){
-				renderer.Color = new Color("#a6004b", 1.0f);
+				renderer.PlayBackwards("pushed");
 				level.EmitEvent(exitEvent);
 			}
 		};

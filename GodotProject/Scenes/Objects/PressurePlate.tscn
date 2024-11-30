@@ -1,12 +1,35 @@
-[gd_scene load_steps=5 format=3 uid="uid://c17f0wrak17lf"]
+[gd_scene load_steps=9 format=3 uid="uid://c17f0wrak17lf"]
 
 [ext_resource type="Script" path="res://Scripts/PressurePlate.cs" id="1_2eghf"]
+[ext_resource type="Texture2D" uid="uid://cd5whhssieufd" path="res://resource/button.png" id="2_cctww"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t13ur"]
 size = Vector2(32, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_64dwt"]
 size = Vector2(35, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yaujm"]
+atlas = ExtResource("2_cctww")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqt38"]
+atlas = ExtResource("2_cctww")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_78mfw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yaujm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqt38")
+}],
+"loop": false,
+"name": &"pushed",
+"speed": 24.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dd1v8"]
 size = Vector2(32, 16)
@@ -28,11 +51,10 @@ collision_layer = 0
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_64dwt")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
-color = Color(0.65098, 0, 0.294118, 1)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -14)
+sprite_frames = SubResource("SpriteFrames_78mfw")
+animation = &"pushed"
 
 [node name="StaticBody2D" type="AnimatableBody2D" parent="."]
 collision_layer = 12

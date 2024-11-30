@@ -113,7 +113,7 @@ namespace Fcc{
 			if(!Input.IsActionPressed("ui_accept"))jumpTurnTill = jumpTill = 0;
 			vel.Y += dt * gravity * (frameCounter < jumpTill ? jumpGravityMultiplier : 1.0f);
 			vel.Y = Mathf.Clamp(vel.Y, -Mathf.Inf, maxFallSpeed);
-			renderer.AnimationFinished += ()=>{if (renderer.GetAnimation() == "jump"){renderer.SetAnimation("down");GD.Print("down");}};
+			renderer.AnimationFinished += ()=>{if (renderer.GetAnimation() == "jump"){renderer.SetAnimation("hover");GD.Print("hover");}};
 			//GD.Print(wasOnFloor);
 			if(!wasOnFloor && cb.IsOnFloor()){
 				renderer.Play("fall");GD.Print("fall");

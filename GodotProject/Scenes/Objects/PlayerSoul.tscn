@@ -1,10 +1,99 @@
-[gd_scene load_steps=5 format=3 uid="uid://c41wievy5a4s6"]
+[gd_scene load_steps=14 format=3 uid="uid://c41wievy5a4s6"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerSoul.cs" id="1_mpgqv"]
-[ext_resource type="Texture2D" uid="uid://csq3soiindg8o" path="res://testplayer.png" id="2_i6tbk"]
+[ext_resource type="Texture2D" uid="uid://cr7tcehasgidx" path="res://resource/soul/run.png" id="2_ytpfc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ac8bs"]
 size = Vector2(32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bqk8"]
+atlas = ExtResource("2_ytpfc")
+region = Rect2(0, 0, 64, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72rvi"]
+atlas = ExtResource("2_ytpfc")
+region = Rect2(64, 0, 64, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y02nt"]
+atlas = ExtResource("2_ytpfc")
+region = Rect2(128, 0, 64, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4ltv"]
+atlas = ExtResource("2_ytpfc")
+region = Rect2(192, 0, 64, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2anu4"]
+atlas = ExtResource("2_ytpfc")
+region = Rect2(256, 0, 64, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k660c"]
+atlas = ExtResource("2_ytpfc")
+region = Rect2(320, 0, 64, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pg87s"]
+atlas = ExtResource("2_ytpfc")
+region = Rect2(384, 0, 64, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wtfh"]
+atlas = ExtResource("2_ytpfc")
+region = Rect2(448, 0, 64, 101)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ij361"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"float",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bqk8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72rvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y02nt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4ltv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2anu4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k660c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pg87s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wtfh")
+}],
+"loop": true,
+"name": &"run",
+"speed": 20.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fw8ek"]
 size = Vector2(32, 40)
@@ -18,11 +107,9 @@ possessArea = NodePath("Area2D")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["PlayerBodyTouchActivater"]]
 shape = SubResource("RectangleShape2D_ac8bs")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0.254902, 1, 0.498039)
-texture = ExtResource("2_i6tbk")
-region_enabled = true
-region_rect = Rect2(0, 0, 32, 40)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ij361")
+animation = &"die"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

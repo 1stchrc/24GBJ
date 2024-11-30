@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6xjki2awxet7"
-path="res://.godot/imported/storeableBlock.png-60ebaa3a59522d64f8caa68b1d6acc93.ctex"
+uid="uid://njj5e65gpwfm"
+path="res://.godot/imported/textbox1.png-fc2484b851bbf092415bb31202e8f523.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resource/storeableBlock.png"
-dest_files=["res://.godot/imported/storeableBlock.png-60ebaa3a59522d64f8caa68b1d6acc93.ctex"]
+source_file="res://resource/UI/textbox1.png"
+dest_files=["res://.godot/imported/textbox1.png-fc2484b851bbf092415bb31202e8f523.ctex"]
 
 [params]
 

@@ -343,7 +343,7 @@ shape = SubResource("RectangleShape2D_u583n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_y2nja")
-animation = &"land"
+animation = &"run"
 autoplay = "idle"
 
 [node name="SpineDetector" type="Area2D" parent="."]

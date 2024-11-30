@@ -58,7 +58,6 @@ namespace Fcc{
 			for(int i = 0; i < 10; ++i)await level.physicsUpdate.Wait();
 			level.loader.Reset();
 		}
-		bool wasOnFloor = false;
 		public void Project(){
 			GetParent().CallDeferred(Node.MethodName.RemoveChild, this);
 			level.CallDeferred(Node.MethodName.AddChild, this);
@@ -85,19 +84,18 @@ namespace Fcc{
 				if(cb.IsOnFloor())	dv += (sgn * hAxis - 1.0f) * hGroundDrag;
 				else dv *= airHMultiplier;
 				abVelX += dv * dt;
-				if(abVelX < 0.0f){
+				if(abVelX < 0.0f)
 					abVelX = 0.0f;
-					if (!renderer.IsPlaying() || renderer.GetAnimation()=="run"){
-						renderer.Play("idle");
-						GD.Print("idle");}}
-				else{
-					if (!renderer.IsPlaying() || renderer.GetAnimation()=="idle"){
-						renderer.Play("run"); GD.Print("run");
-						}
-					}
 				vel.X = abVelX * sgn;
 			}
-			if(cb.IsOnFloor())	wolfTill = frameCounter + wolfFrames;
+			if(cb.IsOnFloor()){
+				if(hAxis == 0){
+					if(!renderer.IsPlaying() || renderer.Animation == "run")renderer.Play("idle");
+				} else {
+					if(!renderer.IsPlaying() || renderer.Animation == "idle")renderer.Play("run");
+				}
+				wolfTill = frameCounter + wolfFrames;
+			}
 			if(Input.IsActionJustPressed("ui_accept"))	preTill = frameCounter + preFrames;
 			if(frameCounter < wolfTill && frameCounter < preTill){
 				renderer.Play("jump");GD.Print("jump");
@@ -114,12 +112,16 @@ namespace Fcc{
 			if(!Input.IsActionPressed("ui_accept"))jumpTurnTill = jumpTill = 0;
 			vel.Y += dt * gravity * (frameCounter < jumpTill ? jumpGravityMultiplier : 1.0f);
 			vel.Y = Mathf.Clamp(vel.Y, -Mathf.Inf, maxFallSpeed);
-			renderer.AnimationFinished += ()=>{if (renderer.GetAnimation() == "jump"){renderer.SetAnimation("hover");GD.Print("hover");}};
+			if (renderer.Animation != "hover" && (
+					!renderer.IsPlaying() && renderer.GetAnimation() == "jump"
+					|| !cb.IsOnFloor()
+				)){
+				renderer.SetAnimation("hover");GD.Print("hover");
+			}
 			//GD.Print(wasOnFloor);
-			if(!wasOnFloor && cb.IsOnFloor()){
+			if(renderer.Animation == "hover" && cb.IsOnFloor()){
 				renderer.Play("land");GD.Print("land");
-				}
-			wasOnFloor = cb.IsOnFloor();
+			}
 			cb.Velocity = vel;
 			cb.MoveAndSlide();
 		}

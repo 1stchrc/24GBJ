@@ -80,8 +80,8 @@ namespace Fcc{
 				if(abVelX < 0.0f)abVelX = 0.0f;
 				vel.X = abVelX * sgn;
 			}
-			if(cb.IsOnFloor())wolfTill = frameCounter + wolfFrames;
-			if(Input.IsActionJustPressed("ui_accept"))preTill = frameCounter + preFrames;
+			if(cb.IsOnFloor())	wolfTill = frameCounter + wolfFrames;
+			if(Input.IsActionJustPressed("ui_accept"))	preTill = frameCounter + preFrames;
 			if(frameCounter < wolfTill && frameCounter < preTill){
 				wolfTill = preTill = 0;
 				jumpTill = frameCounter + jumpFrames;

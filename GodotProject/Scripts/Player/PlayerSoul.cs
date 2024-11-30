@@ -52,7 +52,9 @@ namespace Fcc{
 			canOperate = false;
 			cb.Velocity = Vector2.Zero;
 			GD.Print("soul got killed");
-			for(int i = 0; i < 60; ++i)await level.physicsUpdate.Wait();
+			for(int i = 0; i < 30; ++i)await level.physicsUpdate.Wait();
+			await level.loader.PlayTransOut(bodyb.GlobalPosition);
+			for(int i = 0; i < 10; ++i)await level.physicsUpdate.Wait();
 			level.loader.Reset();
 		}
 		bool wasOnFloor = false;
@@ -138,6 +140,7 @@ namespace Fcc{
 			cb = bodyb;
 			Visible = false;
 			cb.CallDeferred(Node.MethodName.AddChild, this);
+			level.loader?.PlayTransIn(body.GlobalPosition);
 			for(;;){
 				float dt = await level.physicsUpdate.Wait();
 				++frameCounter;

@@ -1,7 +1,44 @@
-[gd_scene load_steps=2 format=3 uid="uid://knoynorwimvb"]
+[gd_scene load_steps=6 format=3 uid="uid://knoynorwimvb"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelLoader.cs" id="1_0tmp2"]
+[ext_resource type="Texture2D" uid="uid://c0kowph6siwol" path="res://LevelTransitionMaskHole.png" id="2_auikl"]
+[ext_resource type="Shader" path="res://Shaders/LevelTransitionMask.gdshader" id="2_i64cv"]
 
-[node name="LevelLoader" type="Node"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_vmgav"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8nme5"]
+resource_local_to_scene = true
+shader = ExtResource("2_i64cv")
+shader_parameter/mask_color = null
+shader_parameter/sampler = SubResource("ViewportTexture_vmgav")
+
+[node name="LevelLoader" type="Node" node_paths=PackedStringArray("TransMaskHole")]
 script = ExtResource("1_0tmp2")
 levelList = PackedStringArray("res://levels/Level_1.tscn")
+TransMaskHole = NodePath("SubViewport/Sprite2D")
+
+[node name="whereLevelInitializedAt" type="Node" parent="."]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport"]
+texture = ExtResource("2_auikl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_8nme5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

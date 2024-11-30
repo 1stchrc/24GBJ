@@ -36,6 +36,6 @@ public partial class GeneralLevel : Node2D{
 		dfsChildren(this);
 	}
 	public override void _PhysicsProcess(double delta){
-		physicsUpdate.Emit((float)delta);
+		if(loader == null)physicsUpdate.Emit((float)delta);
 	}
 }

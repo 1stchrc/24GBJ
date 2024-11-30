@@ -1,6 +1,6 @@
 shader_type canvas_item;
 uniform sampler2D subv;
-uniform vec4 modu;
+uniform vec4 modu : source_color;
 void fragment() {
 	vec4 sv_color = texture(subv, UV);
 	float light = max(max(sv_color.x, sv_color.y), sv_color.z);

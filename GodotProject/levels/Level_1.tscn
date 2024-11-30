@@ -206,7 +206,6 @@ exitEvent = "_"
 
 [node name="PlayerBody" parent="." instance=ExtResource("4_rairh")]
 position = Vector2(152, 160)
-scale = Vector2(1.00242, 0.978902)
 platform_floor_layers = 4294901764
 
 [node name="MovingBlock2" parent="." node_paths=PackedStringArray("to") instance=ExtResource("3_tbv5l")]

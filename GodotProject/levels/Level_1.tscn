@@ -204,6 +204,9 @@ scale = Vector2(1.08, 1)
 enterEvent = "A"
 exitEvent = "_"
 
+[node name="Exit" parent="." instance=ExtResource("7_rmtw7")]
+position = Vector2(1975, 230)
+
 [node name="PlayerBody" parent="." instance=ExtResource("4_rairh")]
 position = Vector2(152, 160)
 platform_floor_layers = 4294901764
@@ -226,13 +229,10 @@ exitEvent = "~B"
 position = Vector2(156.75, -512.694)
 
 [node name="Robot" parent="." instance=ExtResource("6_hfrub")]
-position = Vector2(-74, 151)
-
-[node name="Exit" parent="." instance=ExtResource("7_rmtw7")]
-position = Vector2(1975, 230)
+position = Vector2(-546, 187)
 
 [node name="Fragile" parent="." instance=ExtResource("8_hcj17")]
-position = Vector2(-164, 187)
+position = Vector2(-546, 320)
 
 [node name="StorableBlock" parent="." instance=ExtResource("9_2xdsr")]
 position = Vector2(966, 433)

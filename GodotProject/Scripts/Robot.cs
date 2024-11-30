@@ -12,15 +12,16 @@ namespace Fcc{
 		bool stored = false;
 		public uint RequiredLayer => 4;
 
-        public Shape2D RequiredSpace => throw new NotImplementedException();
+		public Shape2D RequiredSpace => GetChild<CollisionShape2D>(0).Shape;
 
-        public Vector2 RenderSize => throw new NotImplementedException();
+		public Vector2 RenderSize => new Vector2(200, 124);
 
-        public void Possess(PlayerSoul ps){
+		public void Possess(PlayerSoul ps){
 			soul = ps;
 		}
 		public void Unpossess(){
 			soul = null;
+			GetChild<AnimatedSprite2D>(2).Play("idle");
 		}
 		public void Kill(){
 			if(discarded)return;
@@ -57,12 +58,6 @@ namespace Fcc{
 		}
 		public void Unstore(){
 			stored = false;
-		}
-
-		public Shape2D GetRequiredSpace(){
-			var rect = new RectangleShape2D();
-			rect.Size = new Vector2(32, 40);
-			return rect;
 		}
 
 	}

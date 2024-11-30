@@ -18,16 +18,23 @@ namespace Fcc{
 		}
 		public void Unpossess(){
 			possessed = false;
+			GetChild<AnimatedSprite2D>(2).Play("idle");
 		}
 		PlayerSoul soul = GD.Load<PackedScene>("res://Scenes/Objects/PlayerSoul.tscn").Instantiate() as PlayerSoul;
 		
 		public void Kill(){
 			if(!soul.canOperate)return;
 			Velocity = Vector2.Zero;
-			GetChild<AnimatedSprite2D>(2).Play("die");
 			GD.Print("body got killed");
 			if(!soul.isSoulForm)soul.Project();
-			soul.Kill();
+			soul.Kill(this);
+			{
+				var v = GetViewport();
+				if(v != null){
+					var c = v.GetCamera2D();
+					if(c != null)c.Position = GlobalPosition;
+				}
+			}
 		}
 		public async void FeedLevelInstance(GeneralLevel level){
 			possessed = true;
@@ -37,6 +44,7 @@ namespace Fcc{
 			for(;;){
 				float dt = await level.physicsUpdate.Wait();
 				if(!possessed){
+					
 					Vector2 vel = Velocity;
 					int sgn = Mathf.Sign(vel.X);
 					float abVelX = sgn * vel.X;
@@ -47,14 +55,16 @@ namespace Fcc{
 					Velocity = vel;
 					MoveAndSlide();
 				}
-				if(possessed && soul.canOperate ){
+				if(possessed && soul.canOperate){
 					var arr = endDetect.GetOverlappingAreas();
 					if(arr.Count != 0){
 						soul.canOperate = false;
 						GD.Print("Congratulations");
+						GetChild<AnimatedSprite2D>(2).Play("idle");
 						var exitNode = arr[0];
 						exitNode.GetChild<AnimatedSprite2D>(1).Play("open");
-						for(int i = 0; i < 60; ++i)await level.physicsUpdate.Wait();
+						for(int i = 0; i < 40; ++i)await level.physicsUpdate.Wait();
+						await level.loader.PlayTransOut(GlobalPosition);
 						level.loader.MoveToNext();
 					}
 				}

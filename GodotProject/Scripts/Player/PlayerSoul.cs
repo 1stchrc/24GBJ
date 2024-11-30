@@ -3,6 +3,7 @@ using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Godot;
+using Godot.NativeInterop;
 
 
 namespace Fcc{
@@ -16,6 +17,7 @@ namespace Fcc{
 	}
 	public partial class PlayerSoul : CharacterBody2D{
 		public static float maxHSpeed => 500.0f;
+		public static float maxHRoboSpeed => 200.0f;
 		public static float hAccel => 2000.0f;
 		public static float hGroundDrag => 1500.0f;
 		public static float hAirDrag => 0.02f;
@@ -48,13 +50,15 @@ namespace Fcc{
 		ulong jumpTurnTill = 0;
 		[Export]
 		float storeRadius = 144.0f;
-		public async void Kill(){
+		public async void Kill(CharacterBody2D victim){
 			if(!canOperate)return;
+			GetChild<AnimatedSprite2D>(2).Play("die");
+			bodyb.GetChild<AnimatedSprite2D>(2).Play("die");
 			canOperate = false;
 			cb.Velocity = Vector2.Zero;
 			GD.Print("soul got killed");
 			for(int i = 0; i < 30; ++i)await level.physicsUpdate.Wait();
-			await level.loader.PlayTransOut(bodyb.GlobalPosition);
+			await level.loader.PlayTransOut(victim.GlobalPosition);
 			for(int i = 0; i < 10; ++i)await level.physicsUpdate.Wait();
 			level.loader.Reset();
 		}
@@ -82,7 +86,8 @@ namespace Fcc{
 				renderer.FlipH = (hAxis == -1f) ? true : (hAxis == 1f) ? false : renderer.FlipH;
 				float abVelX = sgn * vel.X;
 				float dv = 0.0f;
-				if(sgn * hAxis < 0.0f || abVelX < maxHSpeed)	dv += sgn * hAxis * hAccel;
+				float ms = cb is Robot ? maxHRoboSpeed : maxHSpeed;
+				if(sgn * hAxis < 0.0f || abVelX < ms)	dv += sgn * hAxis * hAccel;
 				if(cb.IsOnFloor())	dv += (sgn * hAxis - 1.0f) * hGroundDrag;
 				else dv *= airHMultiplier;
 				abVelX += dv * dt;
@@ -99,7 +104,7 @@ namespace Fcc{
 				wolfTill = frameCounter + wolfFrames;
 			}
 			if(Input.IsActionJustPressed("ui_accept"))	preTill = frameCounter + preFrames;
-			if(frameCounter < wolfTill && frameCounter < preTill){
+			if(frameCounter < wolfTill && frameCounter < preTill && !(cb is Robot)){
 				renderer.Play("jump");GD.Print("jump");
 				wolfTill = preTill = 0;
 				jumpTill = frameCounter + jumpFrames;
@@ -128,6 +133,8 @@ namespace Fcc{
 			cb.MoveAndSlide();
 		}
 		void PlayerIdle(float dt){
+			var anim = cb.GetChild<AnimatedSprite2D>(2);
+			if(anim.Animation != "idle")anim.Play("idle");
 			Vector2 vel = cb.Velocity;
 			vel.X *= 1.0f - hAirDrag;
 			float sgn = Mathf.Sign(vel.X);
@@ -140,16 +147,21 @@ namespace Fcc{
 			cb.MoveAndSlide();
 		}
 		public async void Init(PlayerBody body, GeneralLevel lv){
+			GetChild<Area2D>(3).BodyEntered += _ => {
+				if(isSoulForm && canOperate)Kill(this);
+			};
 			level = lv;
 			bodyb = body;
 			cb = bodyb;
 			Visible = false;
 			lv.CallDeferred(Node.MethodName.AddChild, this);
 			level.loader?.PlayTransIn(body.GlobalPosition);
-			
+			IPossessable ps = null;
 			for(;;){
 				float dt = await level.physicsUpdate.Wait();
+				++frameCounter;
 				if(!isSoulForm)GlobalPosition = cb.GlobalPosition;
+				if(!canOperate)continue;
 				{
 					var v = GetViewport();
 					if(v != null){
@@ -157,23 +169,26 @@ namespace Fcc{
 						if(c != null)c.Position = GlobalPosition;
 					}
 				}
-				++frameCounter;
-				if(!canOperate)	continue;
+				if(isSoulForm){
+					if(ps != null)(ps as Node2D).Modulate = new Color("#ffffff", 1.0f);
+					ps = null;
+					foreach(var n in possessArea.GetOverlappingBodies()){
+						if(n is IPossessable){
+							ps = n as IPossessable;
+							break;
+						}
+					}
+					if(ps != null)(ps as Node2D).Modulate = new Color("#df55ff", 1.0f);
+				}
 				if(Input.IsActionJustPressed("soul_projection")){
 					if(!isSoulForm){
 						Project();
 					}else{
-						IPossessable ps = null;
-						foreach(var n in possessArea.GetOverlappingBodies()){
-							if(n is IPossessable){
-								ps = n as IPossessable;
-								break;
-							}
-						}
 						if(ps != null){
 							//level.CallDeferred(Node.MethodName.RemoveChild, this);
 							Transform = Transform2D.Identity;
 							cb = ps as CharacterBody2D;
+							cb.Modulate = new Color("#ffffff", 1.0f);
 							Visible = false;
 							//cb.CallDeferred(Node.MethodName.AddChild, this);
 							ps.Possess(this);

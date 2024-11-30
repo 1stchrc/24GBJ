@@ -183,15 +183,15 @@ texture = ExtResource("2_xkqhb")
 metadata/_edit_lock_ = true
 
 [node name="MovingBlock" parent="." node_paths=PackedStringArray("to") instance=ExtResource("3_tbv5l")]
-position = Vector2(304, 160)
-scale = Vector2(0.940442, 9.97682)
+position = Vector2(277, 141)
+rotation = 1.5708
 transitionTime = 0.3
 to = NodePath("MoveTo")
 toEvents = PackedStringArray("A")
 backEvents = PackedStringArray("~A")
 
 [node name="MoveTo" type="Node2D" parent="MovingBlock"]
-position = Vector2(0, -50.2857)
+position = Vector2(-397, -4.99998)
 scale = Vector2(1, 0.142857)
 
 [node name="Map" type="TileMapLayer" parent="."]
@@ -213,7 +213,7 @@ platform_floor_layers = 4294901764
 
 [node name="MovingBlock2" parent="." node_paths=PackedStringArray("to") instance=ExtResource("3_tbv5l")]
 position = Vector2(544, 712)
-scale = Vector2(4.64434, 0.655362)
+scale = Vector2(0.5, 0.5)
 transitionTime = 2.0
 to = NodePath("to")
 toEvents = PackedStringArray("B")
@@ -221,12 +221,13 @@ backEvents = PackedStringArray("~B")
 
 [node name="PressurePlate" parent="MovingBlock2" instance=ExtResource("5_hmxjp")]
 visible = false
-position = Vector2(0, -16)
+position = Vector2(0, -29)
+scale = Vector2(5.44, 1)
 enterEvent = "B"
-exitEvent = "~B"
+exitEvent = "_"
 
 [node name="to" type="Node2D" parent="MovingBlock2"]
-position = Vector2(156.75, -512.694)
+position = Vector2(1420, -558)
 
 [node name="Robot" parent="." instance=ExtResource("6_hfrub")]
 position = Vector2(-546, 187)

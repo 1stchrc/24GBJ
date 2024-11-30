@@ -1,9 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7fuhqpduvx84"]
+[gd_scene load_steps=5 format=4 uid="uid://c7fuhqpduvx84"]
 
 [ext_resource type="Script" path="res://Scripts/MovingBlock.cs" id="1_x7w02"]
+[ext_resource type="Texture2D" uid="uid://ixnhxnurppts" path="res://resource/objects/moveableBlock.png" id="2_lvrqv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ahmga"]
-size = Vector2(32, 32)
+size = Vector2(318, 61)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_175qu"]
+_surfaces = [{
+"2d": true,
+"aabb": AABB(-174.5, -44, 0, 349, 88, 0),
+"attribute_data": PackedByteArray("0Xt0PwAAAACjxlY9AAAAANWyrTyMLro9D3pAPIwuuj16j047L7poPgAAAAAvumg+AAAAACpB3j5ByLs7cFg7P0HIuzsqQU4/xYRHPQ9rfz9knHY/AACAPzjtfz9GF10/AACAP3lKED4="),
+"format": 34393296913,
+"index_count": 33,
+"index_data": PackedByteArray("AAAMAAsACwAKAAkACQAIAAcABwAGAAUABAADAAIAAgABAAAAAAALAAkACQAHAAUABAACAAAACQAFAAQABAAAAAkA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray("zMweQwAAMMIzMxzDAAAwwpoZJ8MAABDCZmYqwwAAEMJmZi3DAADAwQCALsMAAMDBAIAuw5iZucAAgCzDNDOjQQCALMM0M9dBAIAdwzQzL0I0syFDAAAwQmZmLkMAAABCAIAuQ83M/ME=")
+}]
 
 [node name="MovingBlock" type="AnimatableBody2D"]
 collision_layer = 12
@@ -11,4 +26,10 @@ collision_mask = 0
 script = ExtResource("1_x7w02")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_ahmga")
+
+[node name="Sprite2D" type="MeshInstance2D" parent="."]
+position = Vector2(0, 4)
+mesh = SubResource("ArrayMesh_175qu")
+texture = ExtResource("2_lvrqv")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://c17f0wrak17lf"]
 
 [ext_resource type="Script" path="res://Scripts/PressurePlate.cs" id="1_2eghf"]
-[ext_resource type="Texture2D" uid="uid://cd5whhssieufd" path="res://resource/button.png" id="2_cctww"]
+[ext_resource type="Texture2D" uid="uid://cd5whhssieufd" path="res://resource/objects/button.png" id="2_cctww"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t13ur"]
 size = Vector2(32, 4)

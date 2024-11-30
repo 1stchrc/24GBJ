@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=4 uid="uid://ctbgk3ausfe30"]
 
 [ext_resource type="Script" path="res://Scripts/StorableBlock.cs" id="1_hn1iw"]
-[ext_resource type="Texture2D" uid="uid://c6xjki2awxet7" path="res://resource/storeableBlock.png" id="2_d01n2"]
+[ext_resource type="Texture2D" uid="uid://c6xjki2awxet7" path="res://resource/objects/storeableBlock.png" id="2_d01n2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lamse"]
 size = Vector2(317, 58)

@@ -1,13 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://d2ctfix2acgoi"]
 
 [ext_resource type="Script" path="res://Scripts/Robot.cs" id="1_jljor"]
-[ext_resource type="Texture2D" uid="uid://csq3soiindg8o" path="res://testplayer.png" id="2_otnpi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oan0r"]
 size = Vector2(32, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vtrx5"]
 size = Vector2(32, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f7hmt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dpxv2"]
 
@@ -25,11 +26,8 @@ collision_mask = 256
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_vtrx5")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0.309804, 0.305882, 1)
-texture = ExtResource("2_otnpi")
-region_enabled = true
-region_rect = Rect2(0, 0, 32, 40)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_f7hmt")
 
 [node name="Area2D2" type="Area2D" parent="."]
 collision_layer = 0

@@ -222,7 +222,7 @@ backEvents = PackedStringArray("~B")
 [node name="PressurePlate" parent="MovingBlock2" instance=ExtResource("5_hmxjp")]
 visible = false
 position = Vector2(0, -29)
-scale = Vector2(5.44, 1)
+scale = Vector2(6.4, 1)
 enterEvent = "B"
 exitEvent = "~B"
 

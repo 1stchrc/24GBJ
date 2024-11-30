@@ -65,24 +65,35 @@ namespace Fcc{
 			isSoulForm = true;
 		}
 		void PlayerMove(float dt){
+			AnimatedSprite2D renderer = cb.GetChild<AnimatedSprite2D>(2);
 			Vector2 vel = cb.Velocity;
+			float velYHis_ = vel.Y;
+			
 			float hAxis = Input.GetAxis("ui_left", "ui_right");
 			{
 				int sgn = Mathf.Sign(vel.X);
-				if(sgn == 0)sgn = Mathf.Sign(hAxis);
+				if(sgn == 0)	sgn = Mathf.Sign(hAxis);
 				vel.X *= 1.0f - hAirDrag;
+				renderer.FlipH = (hAxis == -1f) ? true : (hAxis == 1f) ? false : renderer.FlipH;
 				float abVelX = sgn * vel.X;
 				float dv = 0.0f;
-				if(sgn * hAxis < 0.0f || abVelX < maxHSpeed)dv += sgn * hAxis * hAccel;
-				if(cb.IsOnFloor())dv += (sgn * hAxis - 1.0f) * hGroundDrag;
+				if(sgn * hAxis < 0.0f || abVelX < maxHSpeed)	dv += sgn * hAxis * hAccel;
+				if(cb.IsOnFloor())	dv += (sgn * hAxis - 1.0f) * hGroundDrag;
 				else dv *= airHMultiplier;
 				abVelX += dv * dt;
-				if(abVelX < 0.0f)abVelX = 0.0f;
+				if(abVelX < 0.0f){
+					abVelX = 0.0f;
+					if (!renderer.IsPlaying() || renderer.GetAnimation()=="run")
+						renderer.SetAnimation("idle");}
+				else{
+					if (!renderer.IsPlaying() || renderer.GetAnimation()=="idle")
+						renderer.SetAnimation("run"); }
 				vel.X = abVelX * sgn;
 			}
 			if(cb.IsOnFloor())	wolfTill = frameCounter + wolfFrames;
 			if(Input.IsActionJustPressed("ui_accept"))	preTill = frameCounter + preFrames;
 			if(frameCounter < wolfTill && frameCounter < preTill){
+				renderer.Play("jump");
 				wolfTill = preTill = 0;
 				jumpTill = frameCounter + jumpFrames;
 				jumpTurnTill = frameCounter + jumpTurnFrames;
@@ -96,6 +107,17 @@ namespace Fcc{
 			if(!Input.IsActionPressed("ui_accept"))jumpTurnTill = jumpTill = 0;
 			vel.Y += dt * gravity * (frameCounter < jumpTill ? jumpGravityMultiplier : 1.0f);
 			vel.Y = Mathf.Clamp(vel.Y, -Mathf.Inf, maxFallSpeed);
+			float dvy = vel.Y - velYHis_;
+			GD.Print(dvy);
+			bool flyingFlag = false;
+			if (dvy!=0.0f && renderer.GetAnimation()!="jump"){
+				flyingFlag = true;
+				renderer.SetAnimation(vel.Y>0.0f?"up":"down");}
+			if (flyingFlag && dvy == 0.0f){
+				flyingFlag = false;
+				renderer.SetAnimation("fall");
+			}
+				
 			cb.Velocity = vel;
 			cb.MoveAndSlide();
 		}
@@ -120,7 +142,7 @@ namespace Fcc{
 			for(;;){
 				float dt = await level.physicsUpdate.Wait();
 				++frameCounter;
-				if(!canOperate)continue;
+				if(!canOperate)	continue;
 				if(Input.IsActionJustPressed("soul_projection")){
 					if(!isSoulForm){
 						Project();

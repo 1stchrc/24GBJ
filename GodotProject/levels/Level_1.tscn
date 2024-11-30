@@ -199,7 +199,7 @@ tile_map_data = PackedByteArray("AAAAAAgAAAAAAAAAAAABAAgAAAABAAAAAAACAAgAAAABAAA
 tile_set = SubResource("TileSet_dgce7")
 
 [node name="PressurePlate" parent="." instance=ExtResource("5_hmxjp")]
-position = Vector2(248, 248)
+position = Vector2(35, 252)
 scale = Vector2(1.08, 1)
 enterEvent = "A"
 exitEvent = "_"
@@ -226,14 +226,14 @@ exitEvent = "~B"
 position = Vector2(156.75, -512.694)
 
 [node name="Robot" parent="." instance=ExtResource("6_hfrub")]
-position = Vector2(96, 232)
+position = Vector2(-74, 151)
 
 [node name="Exit" parent="." instance=ExtResource("7_rmtw7")]
 position = Vector2(1975, 230)
 
 [node name="Fragile" parent="." instance=ExtResource("8_hcj17")]
-position = Vector2(29, 203)
+position = Vector2(-164, 187)
 
 [node name="StorableBlock" parent="." instance=ExtResource("9_2xdsr")]
-position = Vector2(984, 432)
-scale = Vector2(5.21296, 1.16071)
+position = Vector2(966, 433)
+scale = Vector2(0.4, 0.48)

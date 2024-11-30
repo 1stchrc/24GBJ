@@ -334,11 +334,11 @@ position = Vector2(1.14441e-05, 3.13919)
 scale = Vector2(4.65664, 1.6134)
 shape = SubResource("RectangleShape2D_u583n")
 
-[node name="ExitCheck" type="Area2D" parent="."]
+[node name="ExitDetector" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 16
 
-[node name="c" type="CollisionShape2D" parent="ExitCheck" groups=["PlayerBodyTouchActivater"]]
+[node name="c" type="CollisionShape2D" parent="ExitDetector" groups=["PlayerBodyTouchActivater"]]
 shape = SubResource("RectangleShape2D_u583n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -348,9 +348,9 @@ autoplay = "idle"
 frame = 1
 frame_progress = 0.113684
 
-[node name="SpineCheck" type="Area2D" parent="."]
+[node name="SpineDetector" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 512
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SpineCheck"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpineDetector"]
 shape = SubResource("RectangleShape2D_1hc41")

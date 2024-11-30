@@ -47,11 +47,15 @@ namespace Fcc{
 		ulong jumpTurnTill = 0;
 		[Export]
 		float storeRadius = 144.0f;
-		public void Kill(){
+		public async void Kill(){
 			if(!canOperate)return;
 			canOperate = false;
 			cb.Velocity = Vector2.Zero;
 			GD.Print("soul got killed");
+			for(int i = 0; i < 30; ++i)await level.physicsUpdate.Wait();
+			await level.loader.PlayTransOut(bodyb.GlobalPosition);
+			for(int i = 0; i < 10; ++i)await level.physicsUpdate.Wait();
+			level.loader.Reset();
 		}
 		bool wasOnFloor = false;
 		public void Project(){
@@ -109,7 +113,7 @@ namespace Fcc{
 			if(!Input.IsActionPressed("ui_accept"))jumpTurnTill = jumpTill = 0;
 			vel.Y += dt * gravity * (frameCounter < jumpTill ? jumpGravityMultiplier : 1.0f);
 			vel.Y = Mathf.Clamp(vel.Y, -Mathf.Inf, maxFallSpeed);
-			renderer.AnimationFinished += ()=>{if (renderer.GetAnimation() == "jump"){renderer.SetAnimation("down");GD.Print("down");}};
+			renderer.AnimationFinished += ()=>{if (renderer.GetAnimation() == "jump"){renderer.SetAnimation("hover");GD.Print("hover");}};
 			//GD.Print(wasOnFloor);
 			if(!wasOnFloor && cb.IsOnFloor()){
 				renderer.Play("fall");GD.Print("fall");
@@ -136,6 +140,7 @@ namespace Fcc{
 			cb = bodyb;
 			Visible = false;
 			cb.CallDeferred(Node.MethodName.AddChild, this);
+			level.loader?.PlayTransIn(body.GlobalPosition);
 			for(;;){
 				float dt = await level.physicsUpdate.Wait();
 				++frameCounter;

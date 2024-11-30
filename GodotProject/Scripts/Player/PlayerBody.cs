@@ -33,6 +33,7 @@ namespace Fcc{
 			possessed = true;
 			soul.Init(this, level);
 			Area2D endDetect = GetChild<Area2D>(1);
+			GetChild<Area2D>(3).BodyEntered += _ => Kill();
 			for(;;){
 				float dt = await level.physicsUpdate.Wait();
 				if(!possessed){
@@ -53,6 +54,8 @@ namespace Fcc{
 						GD.Print("Congratulations");
 						var exitNode = arr[0];
 						exitNode.GetChild<AnimatedSprite2D>(1).Play("open");
+						for(int i = 0; i < 60; ++i)await level.physicsUpdate.Wait();
+						level.loader.MoveToNext();
 					}
 				}
 			}

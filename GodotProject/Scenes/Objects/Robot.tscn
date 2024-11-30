@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2ctfix2acgoi"]
+[gd_scene load_steps=6 format=3 uid="uid://d2ctfix2acgoi"]
 
 [ext_resource type="Script" path="res://Scripts/Robot.cs" id="1_jljor"]
 [ext_resource type="Texture2D" uid="uid://csq3soiindg8o" path="res://testplayer.png" id="2_otnpi"]
@@ -8,6 +8,8 @@ size = Vector2(32, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vtrx5"]
 size = Vector2(32, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpxv2"]
 
 [node name="Robot" type="CharacterBody2D"]
 collision_mask = 4
@@ -28,3 +30,11 @@ modulate = Color(1, 0.309804, 0.305882, 1)
 texture = ExtResource("2_otnpi")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 40)
+
+[node name="Area2D2" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_dpxv2")

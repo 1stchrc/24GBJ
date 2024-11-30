@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxe5tumap2dc4"
-path="res://.godot/imported/pickable_plot.png-74e232b980024786f3ca34cd4c2ccc7d.ctex"
+uid="uid://c0kowph6siwol"
+path="res://.godot/imported/LevelTransitionMaskHole.png-7e704840ddd4d946cd7f30b0eb0ec246.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resource/pickable_plot.png"
-dest_files=["res://.godot/imported/pickable_plot.png-74e232b980024786f3ca34cd4c2ccc7d.ctex"]
+source_file="res://LevelTransitionMaskHole.png"
+dest_files=["res://.godot/imported/LevelTransitionMaskHole.png-7e704840ddd4d946cd7f30b0eb0ec246.ctex"]
 
 [params]
 

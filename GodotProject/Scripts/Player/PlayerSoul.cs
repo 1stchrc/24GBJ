@@ -53,7 +53,7 @@ namespace Fcc{
 			cb.Velocity = Vector2.Zero;
 			GD.Print("soul got killed");
 		}
-		
+		bool wasOnFloor = false;
 		public void Project(){
 			GetParent().CallDeferred(Node.MethodName.RemoveChild, this);
 			level.CallDeferred(Node.MethodName.AddChild, this);
@@ -67,7 +67,6 @@ namespace Fcc{
 		void PlayerMove(float dt){
 			AnimatedSprite2D renderer = cb.GetChild<AnimatedSprite2D>(2);
 			Vector2 vel = cb.Velocity;
-			float velYHis_ = vel.Y;
 			
 			float hAxis = Input.GetAxis("ui_left", "ui_right");
 			{
@@ -83,17 +82,20 @@ namespace Fcc{
 				abVelX += dv * dt;
 				if(abVelX < 0.0f){
 					abVelX = 0.0f;
-					if (!renderer.IsPlaying() || renderer.GetAnimation()=="run")
-						renderer.SetAnimation("idle");}
+					if (!renderer.IsPlaying() || renderer.GetAnimation()=="run"){
+						renderer.Play("idle");
+						GD.Print("idle");}}
 				else{
-					if (!renderer.IsPlaying() || renderer.GetAnimation()=="idle")
-						renderer.SetAnimation("run"); }
+					if (!renderer.IsPlaying() || renderer.GetAnimation()=="idle"){
+						renderer.Play("run"); GD.Print("run");
+						}
+					}
 				vel.X = abVelX * sgn;
 			}
 			if(cb.IsOnFloor())	wolfTill = frameCounter + wolfFrames;
 			if(Input.IsActionJustPressed("ui_accept"))	preTill = frameCounter + preFrames;
 			if(frameCounter < wolfTill && frameCounter < preTill){
-				renderer.Play("jump");
+				renderer.Play("jump");GD.Print("jump");
 				wolfTill = preTill = 0;
 				jumpTill = frameCounter + jumpFrames;
 				jumpTurnTill = frameCounter + jumpTurnFrames;
@@ -107,17 +109,12 @@ namespace Fcc{
 			if(!Input.IsActionPressed("ui_accept"))jumpTurnTill = jumpTill = 0;
 			vel.Y += dt * gravity * (frameCounter < jumpTill ? jumpGravityMultiplier : 1.0f);
 			vel.Y = Mathf.Clamp(vel.Y, -Mathf.Inf, maxFallSpeed);
-			float dvy = vel.Y - velYHis_;
-			GD.Print(dvy);
-			bool flyingFlag = false;
-			if (dvy!=0.0f && renderer.GetAnimation()!="jump"){
-				flyingFlag = true;
-				renderer.SetAnimation(vel.Y>0.0f?"up":"down");}
-			if (flyingFlag && dvy == 0.0f){
-				flyingFlag = false;
-				renderer.SetAnimation("fall");
-			}
-				
+			renderer.AnimationFinished += ()=>{if (renderer.GetAnimation() == "jump"){renderer.SetAnimation("down");GD.Print("down");}};
+			//GD.Print(wasOnFloor);
+			if(!wasOnFloor && cb.IsOnFloor()){
+				renderer.Play("fall");GD.Print("fall");
+				}
+			wasOnFloor = cb.IsOnFloor();
 			cb.Velocity = vel;
 			cb.MoveAndSlide();
 		}

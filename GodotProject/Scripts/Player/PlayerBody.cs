@@ -24,6 +24,7 @@ namespace Fcc{
 		public void Kill(){
 			if(!soul.canOperate)return;
 			Velocity = Vector2.Zero;
+			GetChild<AnimatedSprite2D>(2).Play("die");
 			GD.Print("body got killed");
 			soul.Project();
 			soul.Kill();

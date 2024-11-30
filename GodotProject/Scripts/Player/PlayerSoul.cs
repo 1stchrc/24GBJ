@@ -53,7 +53,7 @@ namespace Fcc{
 			cb.Velocity = Vector2.Zero;
 			GD.Print("soul got killed");
 			for(int i = 0; i < 60; ++i)await level.physicsUpdate.Wait();
-			level.loader.ResetLevel();
+			level.loader.Reset();
 		}
 		bool wasOnFloor = false;
 		public void Project(){

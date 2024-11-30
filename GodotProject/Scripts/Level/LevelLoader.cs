@@ -17,8 +17,13 @@ public partial class LevelLoader : Node{
 		curLevelScene = GD.Load<PackedScene>(levelList[curLevelIdx]);
 		LoadCurLevel();
 	}
-	public void ResetLevel(){
+	public void Reset(){
 		levelLoaded.CallDeferred(MethodName.Free);
+		LoadCurLevel();
+	}
+	public void MoveToNext(){
+		levelLoaded.CallDeferred(MethodName.Free);
+		curLevelScene = GD.Load<PackedScene>(levelList[++curLevelIdx]);
 		LoadCurLevel();
 	}
 }

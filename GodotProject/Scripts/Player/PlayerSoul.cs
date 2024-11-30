@@ -47,11 +47,13 @@ namespace Fcc{
 		ulong jumpTurnTill = 0;
 		[Export]
 		float storeRadius = 144.0f;
-		public void Kill(){
+		public async void Kill(){
 			if(!canOperate)return;
 			canOperate = false;
 			cb.Velocity = Vector2.Zero;
 			GD.Print("soul got killed");
+			for(int i = 0; i < 60; ++i)await level.physicsUpdate.Wait();
+			level.loader.ResetLevel();
 		}
 		bool wasOnFloor = false;
 		public void Project(){

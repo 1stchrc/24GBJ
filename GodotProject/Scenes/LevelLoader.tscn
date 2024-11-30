@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://knoynorwimvb"]
+
+[ext_resource type="Script" path="res://Scripts/Level/LevelLoader.cs" id="1_0tmp2"]
+
+[node name="LevelLoader" type="Node"]
+script = ExtResource("1_0tmp2")
+levelList = PackedStringArray("res://levels/Level_1.tscn")

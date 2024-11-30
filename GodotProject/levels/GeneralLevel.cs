@@ -13,6 +13,7 @@ public partial class GeneralLevel : Node2D{
 	public EventSrc<string> eventEvent = new EventSrc<string>();
 	Dictionary<string, Action> events = new Dictionary<string, Action>();
 	public InLevelUI UI;
+	public LevelLoader loader;
 	public void EmitEvent(string eventName){
 		eventEvent.Emit(eventName);
 		Action a;

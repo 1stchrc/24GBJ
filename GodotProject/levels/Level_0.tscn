@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=4 uid="uid://dmx5r42t5rd65"]
 
-[ext_resource type="Script" path="res://levels/GeneralLevel.cs" id="1_0c4ed"]
+[ext_resource type="Script" path="res://Scripts/Level/GeneralLevel.cs" id="1_0c4ed"]
 [ext_resource type="Texture2D" uid="uid://cixk3drwvd3fb" path="res://testtiles.png" id="2_ptaur"]
 [ext_resource type="Texture2D" uid="uid://dlk7piij8u2j6" path="res://resource/background/2.png" id="3_nvdsy"]
 [ext_resource type="PackedScene" uid="uid://c4nynk6ircoio" path="res://Scenes/Objects/PlayerBody.tscn" id="3_yumnl"]

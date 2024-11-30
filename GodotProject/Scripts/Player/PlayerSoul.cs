@@ -40,6 +40,11 @@ namespace Fcc{
 		CharacterBody2D cb;
 		GeneralLevel level;
 
+		[Export]
+		AudioStream jumpAudio;
+		[Export]
+		AudioStream dieAudio;
+
 		public bool isSoulForm = false;
 
 		public bool canOperate = true;
@@ -50,8 +55,17 @@ namespace Fcc{
 		ulong jumpTurnTill = 0;
 		[Export]
 		float storeRadius = 144.0f;
+
+		void PlayAudio(AudioStream astr){
+			var asp = new AudioStreamPlayer();
+			AddChild(asp);
+			asp.Stream = astr;
+			asp.Play();
+			asp.Finished += () => asp.CallDeferred(MethodName.Free);
+		}
 		public async void Kill(CharacterBody2D victim){
 			if(!canOperate)return;
+			PlayAudio(dieAudio);
 			GetChild<AnimatedSprite2D>(2).Play("die");
 			bodyb.GetChild<AnimatedSprite2D>(2).Play("die");
 			canOperate = false;
@@ -106,6 +120,7 @@ namespace Fcc{
 			if(Input.IsActionJustPressed("ui_accept"))	preTill = frameCounter + preFrames;
 			if(frameCounter < wolfTill && frameCounter < preTill && !(cb is Robot)){
 				renderer.Play("jump");GD.Print("jump");
+				PlayAudio(jumpAudio);
 				wolfTill = preTill = 0;
 				jumpTill = frameCounter + jumpFrames;
 				jumpTurnTill = frameCounter + jumpTurnFrames;

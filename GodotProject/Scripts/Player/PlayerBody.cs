@@ -36,6 +36,17 @@ namespace Fcc{
 				}
 			}
 		}
+		void BodyIdle(float dt){
+			Vector2 vel = Velocity;
+			int sgn = Mathf.Sign(vel.X);
+			float abVelX = sgn * vel.X;
+			float dv = -dt * PlayerSoul.hGroundDrag * (IsOnFloor() ? 1.0f : PlayerSoul.airHMultiplier);
+			abVelX = Mathf.Clamp(abVelX + dv, 0, PlayerSoul.maxHSpeed);
+			vel.X = abVelX * sgn;
+			vel.Y += dt * PlayerSoul.gravity;
+			Velocity = vel;
+			MoveAndSlide();
+		}
 		public async void FeedLevelInstance(GeneralLevel level){
 			possessed = true;
 			soul.Init(this, level);
@@ -44,16 +55,7 @@ namespace Fcc{
 			for(;;){
 				float dt = await level.physicsUpdate.Wait();
 				if(!possessed){
-					
-					Vector2 vel = Velocity;
-					int sgn = Mathf.Sign(vel.X);
-					float abVelX = sgn * vel.X;
-					float dv = -dt * PlayerSoul.hGroundDrag * (IsOnFloor() ? 1.0f : PlayerSoul.airHMultiplier);
-					abVelX = Mathf.Clamp(abVelX + dv, 0, PlayerSoul.maxHSpeed);
-					vel.X = abVelX * sgn;
-					vel.Y += dt * PlayerSoul.gravity;
-					Velocity = vel;
-					MoveAndSlide();
+					BodyIdle(dt);
 				}
 				if(possessed && soul.canOperate){
 					var arr = endDetect.GetOverlappingAreas();
@@ -63,7 +65,7 @@ namespace Fcc{
 						GetChild<AnimatedSprite2D>(2).Play("idle");
 						var exitNode = arr[0];
 						exitNode.GetChild<AnimatedSprite2D>(1).Play("open");
-						for(int i = 0; i < 40; ++i)await level.physicsUpdate.Wait();
+						for(int i = 0; i < 35; ++i)BodyIdle(await level.physicsUpdate.Wait());
 						await level.loader.PlayTransOut(GlobalPosition);
 						level.loader.MoveToNext();
 					}

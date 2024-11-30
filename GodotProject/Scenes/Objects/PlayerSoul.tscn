@@ -1,9 +1,11 @@
-[gd_scene load_steps=54 format=3 uid="uid://b8fm47l6thbr0"]
+[gd_scene load_steps=56 format=3 uid="uid://b8fm47l6thbr0"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerSoul.cs" id="1_mpgqv"]
+[ext_resource type="AudioStream" uid="uid://bat5lnrgiau1j" path="res://resource/sounds/jump.mp3" id="2_o4ift"]
 [ext_resource type="Texture2D" uid="uid://cr7tcehasgidx" path="res://resource/soul/run.png" id="2_ytpfc"]
 [ext_resource type="Texture2D" uid="uid://bnvk4p0be8730" path="res://resource/soul/die.png" id="2_yvyq5"]
 [ext_resource type="Texture2D" uid="uid://bg770euxisfg1" path="res://resource/soul/jump.png" id="3_7sn1c"]
+[ext_resource type="AudioStream" uid="uid://b8yi3gs78ag13" path="res://resource/sounds/die.mp3" id="3_rgoa6"]
 [ext_resource type="Texture2D" uid="uid://baadoeyf3ljdi" path="res://resource/soul/idle.png" id="4_b660v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f5k63"]
@@ -361,6 +363,8 @@ collision_layer = 2
 collision_mask = 8
 script = ExtResource("1_mpgqv")
 possessArea = NodePath("Area2D")
+jumpAudio = ExtResource("2_o4ift")
+dieAudio = ExtResource("3_rgoa6")
 storeRadius = 176.0
 
 [node name="c2" type="CollisionShape2D" parent="." groups=["PlayerBodyTouchActivater"]]
@@ -376,6 +380,7 @@ shape = SubResource("RectangleShape2D_fw8ek")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.705882)
+z_index = 2
 sprite_frames = SubResource("SpriteFrames_ij361")
 animation = &"die"
 autoplay = "idle"
@@ -387,3 +392,5 @@ collision_mask = 1024
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpineDetector"]
 position = Vector2(0, 22)
 shape = SubResource("RectangleShape2D_vb0hs")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

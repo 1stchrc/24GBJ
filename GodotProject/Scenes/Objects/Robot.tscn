@@ -167,9 +167,10 @@ position = Vector2(3, -10)
 shape = SubResource("RectangleShape2D_oan0r")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_as_relative = false
 sprite_frames = SubResource("SpriteFrames_f7hmt")
-animation = &"run"
-frame_progress = 0.67542
+animation = &"activate"
+autoplay = "activate"
 
 [node name="Area2D2" type="Area2D" parent="."]
 collision_layer = 0

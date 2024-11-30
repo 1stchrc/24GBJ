@@ -18,10 +18,11 @@ namespace Fcc{
 
 		public void Possess(PlayerSoul ps){
 			soul = ps;
+			GetChild<AnimatedSprite2D>(2).Play("activate");
 		}
 		public void Unpossess(){
 			soul = null;
-			GetChild<AnimatedSprite2D>(2).Play("idle");
+			GetChild<AnimatedSprite2D>(2).PlayBackwards("activate");
 		}
 		public void Kill(){
 			if(discarded)return;
@@ -33,6 +34,7 @@ namespace Fcc{
 			
 		}
 		public async void FeedLevelInstance(GeneralLevel lev){
+			GetChild<AnimatedSprite2D>(2).Play("activate", -1.0f, false);
 			GetChild<Area2D>(1).BodyEntered += b => b.CallDeferred(MethodName.Free);
 			GetChild<Area2D>(3).BodyEntered += _ => Kill();
 			for(;;){

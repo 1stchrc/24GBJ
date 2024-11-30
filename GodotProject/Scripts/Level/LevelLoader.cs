@@ -13,6 +13,10 @@ public partial class LevelLoader : Node{
 	Node WhereLevelInitializedAt;
 	[Export]
 	Node2D TransMaskHole;
+	[Export]
+	AudioStream BGMIntro;
+	[Export]
+	AudioStream BGMLoop;
 	EventSrc<float> update = new EventSrc<float>();
     public override void _PhysicsProcess(double delta){
         levelLoaded.physicsUpdate.Emit((float)delta);
@@ -51,7 +55,16 @@ public partial class LevelLoader : Node{
 		levelLoaded.loader = this;
 		WhereLevelInitializedAt.CallDeferred(MethodName.AddChild, levelLoaded);
 	}
+	AudioStreamPlayer asp;
 	public override void _Ready(){
+		asp = new AudioStreamPlayer();
+		AddChild(asp);
+		asp.Stream = BGMIntro;
+		asp.Play();
+		asp.Finished += () => {
+			asp.Stream = BGMLoop;
+			asp.Play();
+		};
 		(TransMaskHole.GetViewport() as SubViewport).Size = GetViewport().GetWindow().Size;
 		curLevelScene = GD.Load<PackedScene>(levelList[curLevelIdx]);
 		WhereLevelInitializedAt = GetChild(0);

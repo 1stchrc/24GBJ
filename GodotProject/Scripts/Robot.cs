@@ -11,7 +11,12 @@ namespace Fcc{
 		bool discarded = false;
 		bool stored = false;
 		public uint RequiredLayer => 4;
-		public void Possess(PlayerSoul ps){
+
+        public Shape2D RequiredSpace => throw new NotImplementedException();
+
+        public Vector2 RenderSize => throw new NotImplementedException();
+
+        public void Possess(PlayerSoul ps){
 			soul = ps;
 		}
 		public void Unpossess(){

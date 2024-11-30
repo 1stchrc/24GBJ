@@ -8,7 +8,8 @@ using Godot;
 namespace Fcc{
 
 	public interface ITransferrable{
-		public Shape2D GetRequiredSpace();
+		public Shape2D RequiredSpace{get;}
+		public Vector2 RenderSize{get;}
 		public uint RequiredLayer{get;}
 		public void Store();
 		public void Unstore();
@@ -193,6 +194,8 @@ namespace Fcc{
 								mark.CallDeferred(Node.MethodName.Free);
 								if(storedObject == null)break;
 								if(cb == storedObject)Project();
+								level.UI.TransferSlot.Size = (Vector2I)storedObject.RenderSize;
+								level.UI.TransferRender.Size = storedObject.RenderSize;
 								(storedObject as CanvasItem).Modulate = new Color("#ffffff", 1.0f);
 								(storedObject as Node).GetParent().CallDeferred(Node.MethodName.RemoveChild, storedObject as Node);
 								level.UI.TransferSlot.CallDeferred(Node.MethodName.AddChild, storedObject as Node);
@@ -215,7 +218,7 @@ namespace Fcc{
 						Area2D detectArea = new Area2D();
 						var sm = new ShaderMaterial();{
 							ColorRect cr = new ColorRect();
-							cr.SetSize(Vector2.One * 64.0f);
+							cr.SetSize(storedObject.RenderSize);
 							var lm = level.UI.TransferRender.Material as ShaderMaterial;
 							
 							sm.Shader = GD.Load<Shader>("res://Shaders/TransferIndicater.gdshader");
@@ -225,7 +228,7 @@ namespace Fcc{
 							cr.Position = -cr.Size / 2.0f;
 							detectArea.AddChild(cr);
 							var shape = new CollisionShape2D();
-							shape.Shape = storedObject.GetRequiredSpace();
+							shape.Shape = storedObject.RequiredSpace;
 							shape.Scale = (storedObject as Node2D).GlobalScale;
 							detectArea.AddChild(shape);
 							detectArea.Position = GlobalPosition;

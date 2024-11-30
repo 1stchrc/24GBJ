@@ -53,7 +53,7 @@ namespace Fcc{
 			cb.Velocity = Vector2.Zero;
 			GD.Print("soul got killed");
 		}
-		
+		bool wasOnFloor = false;
 		public void Project(){
 			GetParent().CallDeferred(Node.MethodName.RemoveChild, this);
 			level.CallDeferred(Node.MethodName.AddChild, this);
@@ -65,24 +65,37 @@ namespace Fcc{
 			isSoulForm = true;
 		}
 		void PlayerMove(float dt){
+			AnimatedSprite2D renderer = cb.GetChild<AnimatedSprite2D>(2);
 			Vector2 vel = cb.Velocity;
+			
 			float hAxis = Input.GetAxis("ui_left", "ui_right");
 			{
 				int sgn = Mathf.Sign(vel.X);
-				if(sgn == 0)sgn = Mathf.Sign(hAxis);
+				if(sgn == 0)	sgn = Mathf.Sign(hAxis);
 				vel.X *= 1.0f - hAirDrag;
+				renderer.FlipH = (hAxis == -1f) ? true : (hAxis == 1f) ? false : renderer.FlipH;
 				float abVelX = sgn * vel.X;
 				float dv = 0.0f;
-				if(sgn * hAxis < 0.0f || abVelX < maxHSpeed)dv += sgn * hAxis * hAccel;
-				if(cb.IsOnFloor())dv += (sgn * hAxis - 1.0f) * hGroundDrag;
+				if(sgn * hAxis < 0.0f || abVelX < maxHSpeed)	dv += sgn * hAxis * hAccel;
+				if(cb.IsOnFloor())	dv += (sgn * hAxis - 1.0f) * hGroundDrag;
 				else dv *= airHMultiplier;
 				abVelX += dv * dt;
-				if(abVelX < 0.0f)abVelX = 0.0f;
+				if(abVelX < 0.0f){
+					abVelX = 0.0f;
+					if (!renderer.IsPlaying() || renderer.GetAnimation()=="run"){
+						renderer.Play("idle");
+						GD.Print("idle");}}
+				else{
+					if (!renderer.IsPlaying() || renderer.GetAnimation()=="idle"){
+						renderer.Play("run"); GD.Print("run");
+						}
+					}
 				vel.X = abVelX * sgn;
 			}
 			if(cb.IsOnFloor())	wolfTill = frameCounter + wolfFrames;
 			if(Input.IsActionJustPressed("ui_accept"))	preTill = frameCounter + preFrames;
 			if(frameCounter < wolfTill && frameCounter < preTill){
+				renderer.Play("jump");GD.Print("jump");
 				wolfTill = preTill = 0;
 				jumpTill = frameCounter + jumpFrames;
 				jumpTurnTill = frameCounter + jumpTurnFrames;
@@ -96,6 +109,12 @@ namespace Fcc{
 			if(!Input.IsActionPressed("ui_accept"))jumpTurnTill = jumpTill = 0;
 			vel.Y += dt * gravity * (frameCounter < jumpTill ? jumpGravityMultiplier : 1.0f);
 			vel.Y = Mathf.Clamp(vel.Y, -Mathf.Inf, maxFallSpeed);
+			renderer.AnimationFinished += ()=>{if (renderer.GetAnimation() == "jump"){renderer.SetAnimation("down");GD.Print("down");}};
+			//GD.Print(wasOnFloor);
+			if(!wasOnFloor && cb.IsOnFloor()){
+				renderer.Play("fall");GD.Print("fall");
+				}
+			wasOnFloor = cb.IsOnFloor();
 			cb.Velocity = vel;
 			cb.MoveAndSlide();
 		}
@@ -120,7 +139,7 @@ namespace Fcc{
 			for(;;){
 				float dt = await level.physicsUpdate.Wait();
 				++frameCounter;
-				if(!canOperate)continue;
+				if(!canOperate)	continue;
 				if(Input.IsActionJustPressed("soul_projection")){
 					if(!isSoulForm){
 						Project();

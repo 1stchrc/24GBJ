@@ -5,6 +5,7 @@ using Godot;
 
 
 namespace Fcc{
+	
 	public interface IPossessable{
 		public void Possess(PlayerSoul soul);
 		public void Unpossess();
@@ -19,9 +20,11 @@ namespace Fcc{
 			possessed = false;
 		}
 		PlayerSoul soul = GD.Load<PackedScene>("res://Scenes/Objects/PlayerSoul.tscn").Instantiate() as PlayerSoul;
+		
 		public void Kill(){
 			if(!soul.canOperate)return;
 			Velocity = Vector2.Zero;
+			GetChild<AnimatedSprite2D>(2).Play("die");
 			GD.Print("body got killed");
 			soul.Project();
 			soul.Kill();

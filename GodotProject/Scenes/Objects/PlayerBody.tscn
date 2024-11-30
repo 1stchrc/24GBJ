@@ -1,29 +1,63 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4nynk6ircoio"]
+[gd_scene load_steps=6 format=4 uid="uid://c4nynk6ircoio"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerBody.cs" id="1_orgva"]
-[ext_resource type="Texture2D" uid="uid://csq3soiindg8o" path="res://testplayer.png" id="1_soiut"]
+[ext_resource type="Texture2D" uid="uid://btkxpp73lx0fx" path="res://resource/player/player.png" id="2_5xmw0"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0lyi"]
-size = Vector2(32, 40)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u583n"]
+size = Vector2(32, 48)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2efim"]
-size = Vector2(32, 40)
+[sub_resource type="ArrayMesh" id="ArrayMesh_7pl48"]
+_surfaces = [{
+"2d": true,
+"aabb": AABB(-32, -44.3, 0, 64, 108.3, 0),
+"attribute_data": PackedByteArray("ZmYGPwAASD6amdE+mpkdPgAAwD5mZiY+AADAPmZmLj4AAFg+AABgPjMzIz4AAGA+AABQPjMzkT4AAFA+AACYPs3MBD4AAKg+MzOzPQAAqD4AAAA+mpnZPgAAAD4AAP4+ZmaOPpqZID9mZoI+mpkjPwAAMD6amR0/AAAwPpqZFz8AAAA8AAAiPwAAAABmZjc/mpmZPJqZOD9mZrY9AAAyPwAAID4AADI/AAA4PgAANj8AAMA9AAA+PwAAwD3NzEc/ZmaaPgAAXj8AALA+mpl8PwAAsD4AAIA/MzMDPwAAgD/NzA4/zcxkP83MGD+amWU/mpkfPwAAgD8AAEg/AACAPwAAWD+amWI/AABYP5qZWT/NzHo/AABKPwAAgD8AAEo/AACAPwAAQj9mZmI/mpkxPwAAgD8AAAw/AACAPzMzqz4AAHg/MzOhPgAAeD+amZc+AAAwPzMzTz4AADA/zcw8Ps3MDj8AAEg+"),
+"format": 34393296913,
+"index_count": 129,
+"index_data": PackedByteArray("LAArACoAKgApACgAKAAnACYAJQAkACMAIQAgAB8AHwAeAB0AHAAbABoAGAAXABYAEwASABEAEQAQAA8ADAALAAoACgAJAAgABgAFAAQAAwACAAEAAAAsACoAKgAoACYAJQAjACIAIQAfAB0AHAAaABkAGAAWABUAEwARAA8ADAAKAAgABwAGAAQAAwABAAAAAAAqACYAJQAiACEAIQAdABwAHAAZABgAFAATAA8ADAAIAAcABwAEAAMAAwAAACYAJQAhABwAHAAYABUAFAAPAA4ADAAHAAMAAwAmACUAJQAcABUAFQAUAA4ADAADACUAFQAOAA0ADQAMACUAJQAVAA0A"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 45,
+"vertex_data": PackedByteArray("wMzMPwAAHMKYmbnAMzMxwgAAAMHNzCzCAAAAwc3MKMIAAJTBAAAQwmZmrsEAABDCAACYwZqZ3cEAAJjBAADQwZqZvcEAALDBMzPTwQAAsMEAAMDBmJkZwQAAwMEAAAC/NDNjwWhmgkE0M3vBaGaOQQAAqMHQzGxBAACowdDMPEEAAPzBAACIQQAAAMKYmd1BZmb2wWhm4kFmZtLBAADIQQAAsMEAAMhBAACkwQAA2EEAANDBAAD4QQAA0MGamQ9CNDNLwQAAPEIAACDBNDN5QgAAIMEAAIBCwMxMPwAAgELQzGxAmplJQmhmxkA0M0tC0Mz8QAAAgEIAAJBBAACAQgAAsEE0M0VCAACwQTQzM0KamfVBAAAUQgAAAEIAABRCAAAAQgAABELMzMRBaGbGQQAAAEIAAMBAAAAAQpqZqcEAAPBBmpm9wQAA8EHMzNDBAABAQWZmGMIAAEBBmpkhwtDMbEAAABzC")
+}]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6phbf"]
+_surfaces = [{
+"2d": true,
+"aabb": AABB(-32, -44.3, 0, 64, 108.3, 0),
+"attribute_data": PackedByteArray("ZmYGPwAASD6amdE+mpkdPgAAwD5mZiY+AADAPmZmLj4AAFg+AABgPjMzIz4AAGA+AABQPjMzkT4AAFA+AACYPs3MBD4AAKg+MzOzPQAAqD4AAAA+mpnZPgAAAD4AAP4+ZmaOPpqZID9mZoI+mpkjPwAAMD6amR0/AAAwPpqZFz8AAAA8AAAiPwAAAABmZjc/mpmZPJqZOD9mZrY9AAAyPwAAID4AADI/AAA4PgAANj8AAMA9AAA+PwAAwD3NzEc/ZmaaPgAAXj8AALA+mpl8PwAAsD4AAIA/MzMDPwAAgD/NzA4/zcxkP83MGD+amWU/mpkfPwAAgD8AAEg/AACAPwAAWD+amWI/AABYP5qZWT/NzHo/AABKPwAAgD8AAEo/AACAPwAAQj9mZmI/mpkxPwAAgD8AAAw/AACAPzMzqz4AAHg/MzOhPgAAeD+amZc+AAAwPzMzTz4AADA/zcw8Ps3MDj8AAEg+"),
+"format": 34393296913,
+"index_count": 129,
+"index_data": PackedByteArray("LAArACoAKgApACgAKAAnACYAJQAkACMAIQAgAB8AHwAeAB0AHAAbABoAGAAXABYAEwASABEAEQAQAA8ADAALAAoACgAJAAgABgAFAAQAAwACAAEAAAAsACoAKgAoACYAJQAjACIAIQAfAB0AHAAaABkAGAAWABUAEwARAA8ADAAKAAgABwAGAAQAAwABAAAAAAAqACYAJQAiACEAIQAdABwAHAAZABgAFAATAA8ADAAIAAcABwAEAAMAAwAAACYAJQAhABwAHAAYABUAFAAPAA4ADAAHAAMAAwAmACUAJQAcABUAFQAUAA4ADAADACUAFQAOAA0ADQAMACUAJQAVAA0A"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 45,
+"vertex_data": PackedByteArray("wMzMPwAAHMKYmbnAMzMxwgAAAMHNzCzCAAAAwc3MKMIAAJTBAAAQwmZmrsEAABDCAACYwZqZ3cEAAJjBAADQwZqZvcEAALDBMzPTwQAAsMEAAMDBmJkZwQAAwMEAAAC/NDNjwWhmgkE0M3vBaGaOQQAAqMHQzGxBAACowdDMPEEAAPzBAACIQQAAAMKYmd1BZmb2wWhm4kFmZtLBAADIQQAAsMEAAMhBAACkwQAA2EEAANDBAAD4QQAA0MGamQ9CNDNLwQAAPEIAACDBNDN5QgAAIMEAAIBCwMxMPwAAgELQzGxAmplJQmhmxkA0M0tC0Mz8QAAAgEIAAJBBAACAQgAAsEE0M0VCAACwQTQzM0KamfVBAAAUQgAAAEIAABRCAAAAQgAABELMzMRBaGbGQQAAAEIAAMBAAAAAQpqZqcEAAPBBmpm9wQAA8EHMzNDBAABAQWZmGMIAAEBBmpkhwtDMbEAAABzC")
+}]
 
 [node name="PlayerBody" type="CharacterBody2D"]
 collision_mask = 260
 script = ExtResource("1_orgva")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["PlayerBodyTouchActivater"]]
-shape = SubResource("RectangleShape2D_b0lyi")
+[node name="soul" type="CollisionShape2D" parent="." groups=["PlayerBodyTouchActivater"]]
+shape = SubResource("RectangleShape2D_u583n")
+
+[node name="Sprite2D" type="MeshInstance2D" parent="soul"]
+position = Vector2(0, -8)
+scale = Vector2(0.5, 0.5)
+mesh = SubResource("ArrayMesh_7pl48")
+texture = ExtResource("2_5xmw0")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_2efim")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(0, -8)
+scale = Vector2(0.5, 0.5)
+polygon = PackedVector2Array(1.6, -39, -5.8, -44.3, -8, -43.2, -8, -42.2, -18.5, -36, -21.8, -36, -19, -27.7, -19, -26, -23.7, -22, -26.4, -22, -24, -9.6, -24, -0.5, -14.2, 16.3, -15.7, 17.8, -21, 14.8, -21, 11.8, -31.5, 17, -32, 27.7, -30.8, 28.3, -26.3, 25, -22, 25, -20.5, 27, -26, 31, -26, 35.9, -12.7, 47, -10, 62.3, -10, 64, 0.799999, 64, 3.7, 50.4, 6.2, 50.8, 7.9, 64, 18, 64, 22, 49.3, 22, 44.8, 30.7, 37, 32, 37, 32, 33, 24.6, 24.8, 32, 6, 32, -21.2, 30, -23.7, 30, -26.1, 12, -38.1, 12, -40.4, 3.7, -39)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_soiut")
-region_enabled = true
-region_rect = Rect2(0, 0, 32, 40)
+[node name="Sprite2D" type="MeshInstance2D" parent="."]
+position = Vector2(0, -8)
+scale = Vector2(0.5, 0.5)
+mesh = SubResource("ArrayMesh_6phbf")
+texture = ExtResource("2_5xmw0")

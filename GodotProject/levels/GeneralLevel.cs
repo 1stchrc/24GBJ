@@ -25,19 +25,6 @@ public partial class GeneralLevel : Node2D{
 	}
 	void dfsChildren(Node node){
 		foreach(var ch in node.GetChildren()){
-			if(ch is TileMapLayer){
-				TileMapLayer mapSource = ch as TileMapLayer;
-				mapSource.Enabled = false;
-				foreach(var pos in mapSource.GetUsedCells()){
-					string path = mapSource.GetCellTileData(pos).GetCustomDataByLayerId(0).As<string>();
-					var n = GD.Load<PackedScene>($"res://{path}").Instantiate();
-					if(n is ILevelObject){
-						(n as ILevelObject).FeedLevelInstance(this);
-					}
-					if(n is Node2D)(n as Node2D).Translate(new Vector2(pos.X * 32.0f, pos.Y * 32.0f));
-					ch.CallDeferred(Node.MethodName.AddChild, n);	
-				}
-			}
 			if(ch is ILevelObject)(ch as ILevelObject).FeedLevelInstance(this);
 			dfsChildren(ch);
 		}

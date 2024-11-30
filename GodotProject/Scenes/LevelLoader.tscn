@@ -33,7 +33,7 @@ grow_vertical = 2
 texture = ExtResource("2_auikl")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-follow_viewport_enabled = true
+layer = 2
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = SubResource("ShaderMaterial_8nme5")

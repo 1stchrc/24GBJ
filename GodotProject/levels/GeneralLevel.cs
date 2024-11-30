@@ -38,4 +38,8 @@ public partial class GeneralLevel : Node2D{
 	public override void _PhysicsProcess(double delta){
 		if(loader == null)physicsUpdate.Emit((float)delta);
 	}
+    public override void _ExitTree(){
+        base._ExitTree();
+		
+    }
 }

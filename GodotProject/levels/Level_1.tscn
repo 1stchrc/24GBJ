@@ -237,3 +237,18 @@ position = Vector2(-546, 320)
 [node name="StorableBlock" parent="." instance=ExtResource("9_2xdsr")]
 position = Vector2(966, 433)
 scale = Vector2(0.4, 0.48)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_right = 2048
+limit_bottom = 1024
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.72
+drag_top_margin = 0.43
+drag_right_margin = 0.0
+drag_bottom_margin = 0.0
+editor_draw_limits = true
+editor_draw_drag_margin = true

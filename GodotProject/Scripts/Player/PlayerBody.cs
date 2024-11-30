@@ -26,7 +26,7 @@ namespace Fcc{
 			Velocity = Vector2.Zero;
 			GetChild<AnimatedSprite2D>(2).Play("die");
 			GD.Print("body got killed");
-			soul.Project();
+			if(!soul.isSoulForm)soul.Project();
 			soul.Kill();
 		}
 		public async void FeedLevelInstance(GeneralLevel level){

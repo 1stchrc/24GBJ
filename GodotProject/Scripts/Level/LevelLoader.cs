@@ -38,11 +38,11 @@ public partial class LevelLoader : Node{
 	public async Task PlayTransOut(Vector2 center){
 		float t = 0.0f;
 		TransMaskHole.Position = center;
-		// {
-		// 	var cam = GetViewport().GetCamera2D();
-		// 	if(cam != null)
-		// 		TransMaskHole.Position += GetViewport().GetWindow().Size / 2 - cam.GlobalPosition;
-		// }
+		{
+			var cam = GetViewport().GetCamera2D();
+			if(cam != null)
+				TransMaskHole.Position += GetViewport().GetWindow().Size / 2 - cam.GetScreenCenterPosition();
+		}
 		
 		do{
 			TransMaskHole.Scale = Vector2.One * (1.0f - t) * (1.0f - t) * 50.0f;

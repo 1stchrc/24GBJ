@@ -38,7 +38,7 @@ namespace Fcc{
 		CharacterBody2D cb;
 		GeneralLevel level;
 
-		bool isSoulForm = false;
+		public bool isSoulForm = false;
 
 		public bool canOperate = true;
 		ulong frameCounter = 0;
@@ -59,9 +59,11 @@ namespace Fcc{
 			level.loader.Reset();
 		}
 		public void Project(){
-			GetParent().CallDeferred(Node.MethodName.RemoveChild, this);
-			level.CallDeferred(Node.MethodName.AddChild, this);
-			Transform = new Transform2D(cb.Transform.X, cb.Transform.Y, cb.Transform.Origin);
+			var anim = GetChild<AnimatedSprite2D>(2);
+			var canim = cb.GetChild<AnimatedSprite2D>(2);
+			anim.Play(canim.Animation);
+			anim.FlipH = canim.FlipH;
+			GlobalPosition = cb.GlobalPosition;
 			Visible = true;
 			Velocity = cb.Velocity;
 			(cb as IPossessable).Unpossess();
@@ -142,10 +144,19 @@ namespace Fcc{
 			bodyb = body;
 			cb = bodyb;
 			Visible = false;
-			cb.CallDeferred(Node.MethodName.AddChild, this);
+			lv.CallDeferred(Node.MethodName.AddChild, this);
 			level.loader?.PlayTransIn(body.GlobalPosition);
+			
 			for(;;){
 				float dt = await level.physicsUpdate.Wait();
+				if(!isSoulForm)GlobalPosition = cb.GlobalPosition;
+				{
+					var v = GetViewport();
+					if(v != null){
+						var c = v.GetCamera2D();
+						if(c != null)c.Position = GlobalPosition;
+					}
+				}
 				++frameCounter;
 				if(!canOperate)	continue;
 				if(Input.IsActionJustPressed("soul_projection")){
@@ -160,11 +171,11 @@ namespace Fcc{
 							}
 						}
 						if(ps != null){
-							level.CallDeferred(Node.MethodName.RemoveChild, this);
+							//level.CallDeferred(Node.MethodName.RemoveChild, this);
 							Transform = Transform2D.Identity;
 							cb = ps as CharacterBody2D;
 							Visible = false;
-							cb.CallDeferred(Node.MethodName.AddChild, this);
+							//cb.CallDeferred(Node.MethodName.AddChild, this);
 							ps.Possess(this);
 							isSoulForm = false;
 							wolfTill = jumpTill = 0;

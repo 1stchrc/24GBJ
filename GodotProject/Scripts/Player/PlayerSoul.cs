@@ -116,7 +116,7 @@ namespace Fcc{
 			renderer.AnimationFinished += ()=>{if (renderer.GetAnimation() == "jump"){renderer.SetAnimation("hover");GD.Print("hover");}};
 			//GD.Print(wasOnFloor);
 			if(!wasOnFloor && cb.IsOnFloor()){
-				renderer.Play("fall");GD.Print("fall");
+				renderer.Play("land");GD.Print("land");
 				}
 			wasOnFloor = cb.IsOnFloor();
 			cb.Velocity = vel;

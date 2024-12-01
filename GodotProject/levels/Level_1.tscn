@@ -337,7 +337,7 @@ text = "[center]在梦境中，
 潜意识可以脱离主意识，
 无视部分墙体 
 操纵某些机关改变梦境
-[i]按 [b]J[/b] 操控潜意识脱离/进入身体[/i][/center]"
+[i]按 [b]J/Z[/b] 操控潜意识脱离/进入身体[/i][/center]"
 metadata/_edit_use_anchors_ = true
 
 [node name="Note2" type="Sprite2D" parent="."]
@@ -367,7 +367,7 @@ text = "[center]潜意识可以塑造梦境
 在梦境中拾取某些地块
 移动到其他位置
 甚至可以拾取机器人
-[i]长按 [b]L+W/A/S/D[/b] 移动准星[/i][/center]
+[i]长按 [b]L/X+W/A/S/D/[/b]方向键 移动准星[/i][/center]
 "
 metadata/_edit_use_anchors_ = true
 

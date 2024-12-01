@@ -174,6 +174,8 @@ namespace Fcc{
 			bodyb = body;
 			cb = bodyb;
 			Visible = false;
+			level.loader.BGM1asp.VolumeDb = level.loader.volume;
+			level.loader.BGM2asp.VolumeDb = Mathf.LinearToDb(0);
 			lv.CallDeferred(Node.MethodName.AddChild, this);
 			level.loader?.PlayTransIn(body.Position);
 			IPossessable ps = null;

@@ -57,10 +57,7 @@ public partial class LevelLoader : Node{
 	}
 	private Timer _timer;
 	void LoadCurLevel(){
-<<<<<<< HEAD
 		//GetChild<AnimatedSprite2D>(1).Play("cutscene")；
-=======
->>>>>>> 781c7ce9f24de3eb8686259bf902f1e79604f9f8
 		levelLoaded = curLevelScene.Instantiate<GeneralLevel>();
 		levelLoaded.loader = this;
 		WhereLevelInitializedAt.CallDeferred(MethodName.AddChild, levelLoaded);

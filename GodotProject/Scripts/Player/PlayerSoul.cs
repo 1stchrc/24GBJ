@@ -179,7 +179,10 @@ namespace Fcc{
 				if(!isSoulForm)GlobalPosition = cb.GlobalPosition;
 				if(!canOperate)continue;
 				if(Input.IsActionJustPressed("reset")){
-					
+					canOperate = false;
+					await level.loader.PlayTransOut(GlobalPosition);
+					level.loader.Reset();
+					return;
 				}
 				if(isSoulForm && GetChild<Area2D>(3).HasOverlappingBodies())Kill(this);
 				{

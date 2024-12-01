@@ -56,12 +56,15 @@ namespace Fcc{
 		[Export]
 		float storeRadius = 144.0f;
 
-		void PlayAudio(AudioStream astr){
+		AudioStreamPlayer PlayAudio(AudioStream astr){
 			var asp = new AudioStreamPlayer();
 			AddChild(asp);
 			asp.Stream = astr;
 			asp.Play();
 			asp.Finished += () => asp.CallDeferred(MethodName.Free);
+			
+			return asp;
+
 		}
 		public async void Kill(CharacterBody2D victim){
 			if(!canOperate)return;

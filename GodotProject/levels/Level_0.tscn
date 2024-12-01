@@ -283,10 +283,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -834.76
-offset_top = -264.828
-offset_right = -449.76
-offset_bottom = -151.828
+offset_left = -840.542
+offset_top = -299.034
+offset_right = -455.542
+offset_bottom = -186.034
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(3, 3)
@@ -294,8 +294,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 bbcode_enabled = true
 text = "[center]
-[b]A/D[/b] 移动
-[b]Space[/b]跳跃
+[b]A/D[/b]  移动
+[b]Space[/b] 跳跃
+[b]R[/b] 重置关卡
 [/center]"
 metadata/_edit_use_anchors_ = true
 

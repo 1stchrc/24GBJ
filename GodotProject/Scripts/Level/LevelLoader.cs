@@ -23,6 +23,7 @@ public partial class LevelLoader : Node{
 	}
 	public override void _Process(double delta){
 		update.Emit((float)delta);
+		
 	}
 	public async Task PlayTransIn(Vector2 center){
 		float t = 0.0f;
@@ -59,6 +60,7 @@ public partial class LevelLoader : Node{
 	public override void _Ready(){
 		asp = new AudioStreamPlayer();
 		AddChild(asp);
+		asp.SetMaxPolyphony(5);
 		asp.Stream = BGMIntro;
 		asp.Play();
 		asp.Finished += () => {

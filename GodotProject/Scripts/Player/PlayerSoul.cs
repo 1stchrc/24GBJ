@@ -68,6 +68,7 @@ namespace Fcc{
 		}
 		public async void Kill(CharacterBody2D victim){
 			if(!canOperate)return;
+			if (Input.IsActionJustPressed("reset")) level.loader.Reset();
 			PlayAudio(dieAudio);
 			GetChild<AnimatedSprite2D>(2).Play("die");
 			bodyb.GetChild<AnimatedSprite2D>(2).Play("die");

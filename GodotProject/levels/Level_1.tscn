@@ -285,7 +285,7 @@ position = Vector2(1518, -340)
 position = Vector2(-546, 320)
 
 [node name="StorableBlock" parent="." instance=ExtResource("9_2xdsr")]
-position = Vector2(966, 433)
+position = Vector2(958, 406)
 scale = Vector2(0.4, 0.48)
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -336,7 +336,7 @@ bbcode_enabled = true
 text = "[center]在梦境中，
 潜意识可以脱离主意识，
 无视部分墙体 
-对梦境直接造成影响
+操纵某些机关改变梦境
 [i]按 [b]J[/b] 操控潜意识脱离/进入身体[/i][/center]"
 metadata/_edit_use_anchors_ = true
 
@@ -349,10 +349,10 @@ script = ExtResource("13_al782")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Note2"]
 anchors_preset = -1
-anchor_left = 0.514625
-anchor_top = 0.483073
-anchor_right = 0.514625
-anchor_bottom = 0.490886
+anchor_left = 0.518936
+anchor_top = 0.43125
+anchor_right = 0.518936
+anchor_bottom = 0.466405
 offset_left = -610.695
 offset_top = -201.4
 offset_right = -225.695
@@ -364,9 +364,10 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 bbcode_enabled = true
 text = "[center]潜意识可以塑造梦境
-在梦境中移除或添加某些物品
-
-[i]长按 [b]L+W/A/S/D[/b] 移动准星 塑造梦境[/i][/center]
+在梦境中拾取某些地块
+移动到其他位置
+甚至可以拾取机器人
+[i]长按 [b]L+W/A/S/D[/b] 移动准星[/i][/center]
 "
 metadata/_edit_use_anchors_ = true
 

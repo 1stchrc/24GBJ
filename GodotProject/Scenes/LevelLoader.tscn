@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://knoynorwimvb"]
+[gd_scene load_steps=8 format=3 uid="uid://knoynorwimvb"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelLoader.cs" id="1_0tmp2"]
 [ext_resource type="Texture2D" uid="uid://c0kowph6siwol" path="res://LevelTransitionMaskHole.png" id="2_auikl"]
 [ext_resource type="Shader" path="res://Shaders/LevelTransitionMask.gdshader" id="2_i64cv"]
+[ext_resource type="AudioStream" uid="uid://co2xbub4s08e8" path="res://resource/BGM/Loop1.mp3" id="3_okbov"]
+[ext_resource type="AudioStream" uid="uid://ko6bmuuntle8" path="res://resource/BGM/Intro.mp3" id="4_qbs1d"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_vmgav"]
 viewport_path = NodePath("SubViewport")
@@ -17,6 +19,8 @@ shader_parameter/sampler = SubResource("ViewportTexture_vmgav")
 script = ExtResource("1_0tmp2")
 levelList = PackedStringArray("res://levels/Level_1.tscn")
 TransMaskHole = NodePath("SubViewport/Sprite2D")
+BGMIntro = ExtResource("4_qbs1d")
+BGMLoop = ExtResource("3_okbov")
 
 [node name="whereLevelInitializedAt" type="Node" parent="."]
 
@@ -33,7 +37,7 @@ grow_vertical = 2
 texture = ExtResource("2_auikl")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-follow_viewport_enabled = true
+layer = 2
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = SubResource("ShaderMaterial_8nme5")

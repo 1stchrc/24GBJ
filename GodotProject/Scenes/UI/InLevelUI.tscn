@@ -12,17 +12,16 @@ shader = ExtResource("2_sm50u")
 shader_parameter/subv = SubResource("ViewportTexture_k3hev")
 
 [node name="InLevelUi" type="CanvasLayer" node_paths=PackedStringArray("TransferSlot", "TransferRender")]
-follow_viewport_enabled = true
 script = ExtResource("1_tn5ey")
 TransferSlot = NodePath("SubViewport")
 TransferRender = NodePath("ColorRect")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_f2bnr")
-offset_left = 1078.0
-offset_top = 11.0
-offset_right = 1142.0
-offset_bottom = 75.0
+offset_left = 1171.0
+offset_top = 61.0
+offset_right = 1235.0
+offset_bottom = 125.0
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true

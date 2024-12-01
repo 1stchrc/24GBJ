@@ -32,3 +32,7 @@ shape = SubResource("RectangleShape2D_lamse")
 [node name="Sprite2D" type="MeshInstance2D" parent="."]
 mesh = SubResource("ArrayMesh_3natj")
 texture = ExtResource("2_d01n2")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.980392, 0.972549, 0.886275, 1)
+texture = ExtResource("2_d01n2")

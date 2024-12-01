@@ -303,5 +303,5 @@ position = Vector2(115, 489)
 position = Vector2(998, 459)
 
 [node name="PlayerBody" parent="." instance=ExtResource("15_w4p12")]
-position = Vector2(45, 179)
+position = Vector2(452, 325)
 platform_floor_layers = 4294901764

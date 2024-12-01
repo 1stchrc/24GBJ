@@ -27,6 +27,7 @@ public partial class LevelLoader : Node{
 	}
 	public override void _Process(double delta){
 		update.Emit((float)delta);
+		
 	}
 	public async Task PlayTransIn(Vector2 center){
 		float t = 0.0f;

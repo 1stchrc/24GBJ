@@ -31,6 +31,10 @@ region = Rect2(512, 0, 128, 124)
 atlas = ExtResource("2_tdv0d")
 region = Rect2(640, 0, 128, 124)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5q46c"]
+atlas = ExtResource("2_tdv0d")
+region = Rect2(640, 0, 128, 124)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_mkimh"]
 atlas = ExtResource("2_tdv0d")
 region = Rect2(512, 0, 128, 124)
@@ -99,6 +103,14 @@ animations = [{
 "loop": false,
 "name": &"activate",
 "speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5q46c")
+}],
+"loop": true,
+"name": &"hover",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.2,
@@ -172,8 +184,9 @@ shape = SubResource("RectangleShape2D_oan0r")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_as_relative = false
 sprite_frames = SubResource("SpriteFrames_f7hmt")
-animation = &"activate"
+animation = &"hover"
 autoplay = "activate"
+frame_progress = 0.84959
 
 [node name="SpineDetector" type="Area2D" parent="AnimatedSprite2D"]
 collision_layer = 0

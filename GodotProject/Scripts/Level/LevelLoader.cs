@@ -18,13 +18,13 @@ public partial class LevelLoader : Node{
 	[Export]
 	AudioStream BGMLoop;
 	EventSrc<float> update = new EventSrc<float>();
-    public override void _PhysicsProcess(double delta){
-        levelLoaded.physicsUpdate.Emit((float)delta);
-    }
-    public override void _Process(double delta){
-        update.Emit((float)delta);
-    }
-    public async Task PlayTransIn(Vector2 center){
+	public override void _PhysicsProcess(double delta){
+		levelLoaded.physicsUpdate.Emit((float)delta);
+	}
+	public override void _Process(double delta){
+		update.Emit((float)delta);
+	}
+	public async Task PlayTransIn(Vector2 center){
 		float t = 0.0f;
 		TransMaskHole.Position = center;
 		// {

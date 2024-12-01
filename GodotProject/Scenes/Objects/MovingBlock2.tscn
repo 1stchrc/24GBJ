@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbommba4dt82k"]
+
+[ext_resource type="Script" path="res://Scripts/MovingBlock.cs" id="1_8x42p"]
+[ext_resource type="Texture2D" uid="uid://cvnljfb5iv6nq" path="res://resource/objects/wall.png" id="2_sficl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ahmga"]
+size = Vector2(318, 61)
+
+[node name="MovingBlock" type="AnimatableBody2D"]
+collision_layer = 12
+collision_mask = 0
+script = ExtResource("1_8x42p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_ahmga")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_sficl")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 1.91
+texture = ExtResource("2_sficl")

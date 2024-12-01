@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://knoynorwimvb"]
+[gd_scene load_steps=19 format=3 uid="uid://knoynorwimvb"]
 
 [ext_resource type="Script" path="res://Scripts/Level/LevelLoader.cs" id="1_0tmp2"]
 [ext_resource type="Texture2D" uid="uid://c0kowph6siwol" path="res://LevelTransitionMaskHole.png" id="2_auikl"]
 [ext_resource type="Shader" path="res://Shaders/LevelTransitionMask.gdshader" id="2_i64cv"]
+[ext_resource type="Texture2D" uid="uid://biaa8qgbrflh4" path="res://resource/UI/cutscenes.png" id="2_rt6w3"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_vmgav"]
 viewport_path = NodePath("SubViewport")
@@ -13,9 +14,94 @@ shader = ExtResource("2_i64cv")
 shader_parameter/mask_color = null
 shader_parameter/sampler = SubResource("ViewportTexture_vmgav")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdisb"]
+atlas = ExtResource("2_rt6w3")
+region = Rect2(0, 0, 2390, 1195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwh27"]
+atlas = ExtResource("2_rt6w3")
+region = Rect2(2390, 0, 2390, 1195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tr551"]
+atlas = ExtResource("2_rt6w3")
+region = Rect2(4780, 0, 2390, 1195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4ixq"]
+atlas = ExtResource("2_rt6w3")
+region = Rect2(7170, 0, 2390, 1195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fese3"]
+atlas = ExtResource("2_rt6w3")
+region = Rect2(9560, 0, 2390, 1195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qj1dt"]
+atlas = ExtResource("2_rt6w3")
+region = Rect2(11950, 0, 2390, 1195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xj1go"]
+atlas = ExtResource("2_rt6w3")
+region = Rect2(14340, 0, 2390, 1195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_klh8k"]
+atlas = ExtResource("2_rt6w3")
+region = Rect2(16730, 0, 2390, 1195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0bmy"]
+atlas = ExtResource("2_rt6w3")
+region = Rect2(19120, 0, 2390, 1195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dly1x"]
+atlas = ExtResource("2_rt6w3")
+region = Rect2(21510, 0, 2390, 1195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkkxd"]
+atlas = ExtResource("2_rt6w3")
+region = Rect2(23900, 0, 2390, 1195)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dbs8h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdisb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwh27")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tr551")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4ixq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fese3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qj1dt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xj1go")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_klh8k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0bmy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dly1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xkkxd")
+}],
+"loop": true,
+"name": &"cutscene",
+"speed": 15.0
+}]
+
 [node name="LevelLoader" type="Node" node_paths=PackedStringArray("TransMaskHole")]
 script = ExtResource("1_0tmp2")
-levelList = PackedStringArray("res://levels/Level_1.tscn", "res://levels/Level_2.tscn")
+levelList = PackedStringArray("res://levels/Level_0.tscn", "res://levels/Level_1.tscn", "res://levels/Level_2.tscn", "res://levels/Level_3.tscn")
 TransMaskHole = NodePath("SubViewport/Sprite2D")
 
 [node name="whereLevelInitializedAt" type="Node" parent="."]
@@ -42,3 +128,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(776, 432)
+scale = Vector2(0.725209, 0.725209)
+sprite_frames = SubResource("SpriteFrames_dbs8h")
+animation = &"cutscene"
+autoplay = "cutscene"
+frame = 10
+frame_progress = 1.0

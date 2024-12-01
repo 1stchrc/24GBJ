@@ -55,11 +55,17 @@ public partial class LevelLoader : Node{
 		}while(t < 1.0f);
 		TransMaskHole.Scale = Vector2.Zero;
 	}
+	private Timer _timer;
 	void LoadCurLevel(){
+		GetChild<AnimatedSprite2D>(1).Play("cutscene")
+		GetChild<AnimatedSprite2D>(1).Finished
 		levelLoaded = curLevelScene.Instantiate<GeneralLevel>();
 		levelLoaded.loader = this;
 		WhereLevelInitializedAt.CallDeferred(MethodName.AddChild, levelLoaded);
+		
+		
 	}
+	
 	public AudioStreamPlayer BGM1asp;
 	public AudioStreamPlayer BGM2asp;
 	[Export]

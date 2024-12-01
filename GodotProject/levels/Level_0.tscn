@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://uq06ijah82mr" path="res://resource/objects/sign1.png" id="8_l1qy6"]
 [ext_resource type="Texture2D" uid="uid://njj5e65gpwfm" path="res://resource/UI/textbox1.png" id="12_vy2wg"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e02aw"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yr5df"]
 texture = ExtResource("2_bllou")
 texture_region_size = Vector2i(32, 32)
 use_texture_padding = false
@@ -170,7 +170,7 @@ terrain_set_0/terrain_2/name = "Terrain 2"
 terrain_set_0/terrain_2/color = Color(0.46875, 0.5, 0.25, 1)
 custom_data_layer_0/name = ""
 custom_data_layer_0/type = 4
-sources/0 = SubResource("TileSetAtlasSource_e02aw")
+sources/0 = SubResource("TileSetAtlasSource_yr5df")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_cj3x4"]
 _surfaces = [{

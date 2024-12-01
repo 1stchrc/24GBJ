@@ -18,8 +18,7 @@ shader_parameter/sampler = SubResource("ViewportTexture_vmgav")
 
 [node name="LevelLoader" type="Node" node_paths=PackedStringArray("TransMaskHole")]
 script = ExtResource("1_0tmp2")
-levelList = PackedStringArray("res://levels/Level_0.tscn", "res://levels/Level_1.tscn", "res://levels/Level_2.tscn", "res://levels/Level_3.tscn")
-curLevelIdx = 3
+levelList = PackedStringArray("res://levels/Level_0.tscn", "res://levels/Level_1.tscn", "res://levels/Level_2.tscn", "res://levels/Level_3.tscn", "res://levels/Level_6.tscn", "", "res://levels/Level_6.tscn")
 TransMaskHole = NodePath("SubViewport/Sprite2D")
 BGMIntro1 = ExtResource("4_qbs1d")
 BGMLoop1 = ExtResource("3_okbov")

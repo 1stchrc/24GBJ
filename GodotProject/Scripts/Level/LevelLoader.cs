@@ -31,7 +31,7 @@ public partial class LevelLoader : Node{
 	}
 	public async Task PlayTransIn(Vector2 center){
 		float t = 0.0f;
-		TransMaskHole.Position = center;
+		TransMaskHole.Position = GetViewport().CanvasTransform * center;
 		// {
 		// 	var cam = GetViewport().GetCamera2D();
 		// 	if(cam != null)

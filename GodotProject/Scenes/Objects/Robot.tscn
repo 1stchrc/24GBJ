@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d2ctfix2acgoi"]
+[gd_scene load_steps=26 format=3 uid="uid://d2ctfix2acgoi"]
 
 [ext_resource type="Script" path="res://Scripts/Robot.cs" id="1_jljor"]
 [ext_resource type="Texture2D" uid="uid://w1ce5lo5rk15" path="res://resource/robot/activate.png" id="2_tdv0d"]

@@ -40,7 +40,7 @@ namespace Fcc{
 				(b as CollisionObject2D).CollisionLayer = 0;
 				b.GetChild<AnimatedSprite2D>(1).Play("break");
 				//播放动画
-				for(int i = 0; i < 10; ++i)await lev.physicsUpdate.Wait();
+				for(int i = 0; i < 60; ++i)await lev.physicsUpdate.Wait();
 				b.CallDeferred(MethodName.Free);
 			};
 			for(;;){

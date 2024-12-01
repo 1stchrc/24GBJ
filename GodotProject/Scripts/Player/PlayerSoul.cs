@@ -175,7 +175,7 @@ namespace Fcc{
 			cb = bodyb;
 			Visible = false;
 			lv.CallDeferred(Node.MethodName.AddChild, this);
-			level.loader?.PlayTransIn(body.GlobalPosition);
+			level.loader?.PlayTransIn(body.Position);
 			IPossessable ps = null;
 			for(;;){
 				float dt = await level.physicsUpdate.Wait();

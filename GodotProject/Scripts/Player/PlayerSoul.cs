@@ -178,6 +178,9 @@ namespace Fcc{
 				++frameCounter;
 				if(!isSoulForm)GlobalPosition = cb.GlobalPosition;
 				if(!canOperate)continue;
+				if(Input.IsActionJustPressed("reset")){
+					
+				}
 				if(isSoulForm && GetChild<Area2D>(3).HasOverlappingBodies())Kill(this);
 				{
 					var v = GetViewport();

@@ -36,7 +36,12 @@ namespace Fcc{
 		public async void FeedLevelInstance(GeneralLevel lev){
 			discarded = false;
 			GetChild<AnimatedSprite2D>(2).Play("activate", -1.0f, false);
-			GetChild<Area2D>(1).BodyEntered += b => b.CallDeferred(MethodName.Free);
+			GetChild<Area2D>(1).BodyEntered += async b => {
+				(b as CollisionObject2D).CollisionLayer = 0;
+				//播放动画
+				for(int i = 0; i < 10; ++i)await lev.physicsUpdate.Wait();
+				b.CallDeferred(MethodName.Free);
+			};
 			for(;;){
 				float dt = await lev.physicsUpdate.Wait();
 				if(discarded)return;

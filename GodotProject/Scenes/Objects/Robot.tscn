@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d2ctfix2acgoi"]
+[gd_scene load_steps=25 format=3 uid="uid://d2ctfix2acgoi"]
 
 [ext_resource type="Script" path="res://Scripts/Robot.cs" id="1_jljor"]
 [ext_resource type="Texture2D" uid="uid://w1ce5lo5rk15" path="res://resource/robot/activate.png" id="2_tdv0d"]
@@ -147,6 +147,9 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgu7o"]
+size = Vector2(30, 30)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dpxv2"]
 size = Vector2(48, 66)
 
@@ -171,6 +174,14 @@ z_as_relative = false
 sprite_frames = SubResource("SpriteFrames_f7hmt")
 animation = &"activate"
 autoplay = "activate"
+
+[node name="SpineDetector" type="Area2D" parent="AnimatedSprite2D"]
+collision_layer = 0
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/SpineDetector"]
+position = Vector2(0, 22)
+shape = SubResource("RectangleShape2D_dgu7o")
 
 [node name="Area2D2" type="Area2D" parent="."]
 collision_layer = 0

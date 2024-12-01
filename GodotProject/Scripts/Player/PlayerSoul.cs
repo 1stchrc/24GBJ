@@ -82,7 +82,7 @@ namespace Fcc{
 		public void Project(){
 			var anim = GetChild<AnimatedSprite2D>(2);
 			var canim = cb.GetChild<AnimatedSprite2D>(2);
-			anim.Play(canim.Animation);
+			anim.Play("hover");
 			anim.FlipH = canim.FlipH;
 			GlobalPosition = cb.GlobalPosition;
 			Visible = true;
@@ -90,6 +90,7 @@ namespace Fcc{
 			(cb as IPossessable).Unpossess();
 			cb = this;
 			isSoulForm = true;
+			GD.Print("Project");
 		}
 		void PlayerMove(float dt){
 			AnimatedSprite2D renderer = cb.GetChild<AnimatedSprite2D>(2);
@@ -137,7 +138,7 @@ namespace Fcc{
 			if(!Input.IsActionPressed("ui_accept"))jumpTurnTill = jumpTill = 0;
 			vel.Y += dt * gravity * (frameCounter < jumpTill ? jumpGravityMultiplier : 1.0f);
 			vel.Y = Mathf.Clamp(vel.Y, -Mathf.Inf, maxFallSpeed);
-			if (renderer.Animation != "hover" && (
+			if (!(cb is Robot) && renderer.Animation != "hover" && (
 					!renderer.IsPlaying() && renderer.GetAnimation() == "jump"
 					|| !cb.IsOnFloor()
 				)){
@@ -165,9 +166,6 @@ namespace Fcc{
 			cb.MoveAndSlide();
 		}
 		public async void Init(PlayerBody body, GeneralLevel lv){
-			GetChild<Area2D>(3).BodyEntered += _ => {
-				if(isSoulForm && canOperate)Kill(this);
-			};
 			level = lv;
 			bodyb = body;
 			cb = bodyb;
@@ -180,6 +178,7 @@ namespace Fcc{
 				++frameCounter;
 				if(!isSoulForm)GlobalPosition = cb.GlobalPosition;
 				if(!canOperate)continue;
+				if(isSoulForm && GetChild<Area2D>(3).HasOverlappingBodies())Kill(this);
 				{
 					var v = GetViewport();
 					if(v != null){
@@ -191,7 +190,7 @@ namespace Fcc{
 					if(ps != null)(ps as Node2D).Modulate = new Color("#ffffff", 1.0f);
 					ps = null;
 					foreach(var n in possessArea.GetOverlappingBodies()){
-						if(n is IPossessable){
+						if(n is IPossessable && !(n as IPossessable).discarded){
 							ps = n as IPossessable;
 							break;
 						}

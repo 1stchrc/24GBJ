@@ -1,10 +1,10 @@
-[gd_scene load_steps=16 format=4 uid="uid://7lk0x1t7o84k"]
+[gd_scene load_steps=16 format=4 uid="uid://5olcnwp4up04"]
 
 [ext_resource type="Script" path="res://Scripts/Level/GeneralLevel.cs" id="1_5em8x"]
 [ext_resource type="Texture2D" uid="uid://b0o1q6tq1hev3" path="res://resource/Wall.png" id="2_1i05h"]
 [ext_resource type="Texture2D" uid="uid://dlk7piij8u2j6" path="res://resource/background/2.png" id="3_j1fxn"]
 [ext_resource type="PackedScene" uid="uid://c17f0wrak17lf" path="res://Scenes/Objects/PressurePlate.tscn" id="4_yjmdv"]
-[ext_resource type="PackedScene" uid="uid://cqgdqwc07eyl8" path="res://Scenes/Objects/MovingDoor.tscn" id="5_q0jkl"]
+[ext_resource type="PackedScene" path="res://Scenes/Objects/MovingDoor.tscn" id="5_q0jkl"]
 [ext_resource type="PackedScene" uid="uid://byxumq35exirc" path="res://Scenes/Objects/Exit.tscn" id="6_8mduo"]
 [ext_resource type="Texture2D" uid="uid://vt5ubbttpear" path="res://resource/objects/exit.png" id="7_h625a"]
 [ext_resource type="Texture2D" uid="uid://uq06ijah82mr" path="res://resource/objects/sign1.png" id="8_c60hq"]
@@ -284,8 +284,8 @@ tile_set = SubResource("TileSet_dgce7")
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = 0
 limit_top = 0
-limit_right = 2048
-limit_bottom = 1024
+limit_right = 1600
+limit_bottom = 896
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true

@@ -10,9 +10,11 @@ namespace Fcc{
 		public void Possess(PlayerSoul soul);
 		public void Unpossess();
 		public void Kill();
+		public bool discarded{get;}
 	}
 	public partial class PlayerBody : CharacterBody2D, ILevelObject, IPossessable{
 		public bool possessed = true;
+		public bool discarded{get{return !soul.canOperate;}}
 		public void Possess(PlayerSoul soul){
 			possessed = true;
 		}

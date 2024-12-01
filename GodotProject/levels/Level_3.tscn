@@ -267,7 +267,7 @@ exitEvent = "~B"
 
 [node name="Fragile" parent="." instance=ExtResource("8_ct6wj")]
 position = Vector2(608, 496)
-scale = Vector2(4, 0.5)
+scale = Vector2(0.8, 0.5)
 
 [node name="StorableBlock" parent="." instance=ExtResource("11_6gw6h")]
 position = Vector2(371, 704)

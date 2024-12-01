@@ -14,9 +14,13 @@ public partial class LevelLoader : Node{
 	[Export]
 	Node2D TransMaskHole;
 	[Export]
-	AudioStream BGMIntro;
+	AudioStream BGMIntro1;
 	[Export]
-	AudioStream BGMLoop;
+	AudioStream BGMLoop1;
+	[Export]
+	AudioStream BGMIntro2;
+	[Export]
+	AudioStream BGMLoop2;
 	EventSrc<float> update = new EventSrc<float>();
 	public override void _PhysicsProcess(double delta){
 		levelLoaded.physicsUpdate.Emit((float)delta);
@@ -55,15 +59,28 @@ public partial class LevelLoader : Node{
 		levelLoaded.loader = this;
 		WhereLevelInitializedAt.CallDeferred(MethodName.AddChild, levelLoaded);
 	}
-	AudioStreamPlayer asp;
+	public AudioStreamPlayer BGM1asp;
+	public AudioStreamPlayer BGM2asp;
+	[Export]
+	public float volume;
 	public override void _Ready(){
-		asp = new AudioStreamPlayer();
-		AddChild(asp);
-		asp.Stream = BGMIntro;
-		asp.Play();
-		asp.Finished += () => {
-			asp.Stream = BGMLoop;
-			asp.Play();
+		BGM1asp = new AudioStreamPlayer();
+		BGM2asp = new AudioStreamPlayer();
+		BGM1asp.VolumeDb = volume;
+		BGM2asp.VolumeDb = Mathf.LinearToDb(0);
+		AddChild(BGM1asp);
+		AddChild(BGM2asp);
+		BGM1asp.Stream = BGMIntro1;
+		BGM2asp.Stream = BGMIntro2;
+		BGM1asp.Play();
+		BGM2asp.Play();
+		BGM1asp.Finished += () => {
+			BGM1asp.Stream = BGMLoop1;
+			BGM1asp.Play();
+		};
+		BGM2asp.Finished += () => {
+			BGM2asp.Stream = BGMLoop2;
+			BGM2asp.Play();
 		};
 		(TransMaskHole.GetViewport() as SubViewport).Size = GetViewport().GetWindow().Size;
 		curLevelScene = GD.Load<PackedScene>(levelList[curLevelIdx]);

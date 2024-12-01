@@ -91,6 +91,8 @@ namespace Fcc{
 			cb = this;
 			isSoulForm = true;
 			GD.Print("Project");
+			level.loader.BGM1asp.VolumeDb = Mathf.LinearToDb(0);
+			level.loader.BGM2asp.VolumeDb = level.loader.volume;
 		}
 		void PlayerMove(float dt){
 			AnimatedSprite2D renderer = cb.GetChild<AnimatedSprite2D>(2);
@@ -124,7 +126,8 @@ namespace Fcc{
 			if(Input.IsActionJustPressed("ui_accept"))	preTill = frameCounter + preFrames;
 			if(frameCounter < wolfTill && frameCounter < preTill && !(cb is Robot)){
 				renderer.Play("jump");GD.Print("jump");
-				PlayAudio(jumpAudio);
+				var a = PlayAudio(jumpAudio);
+				a.PitchScale = 1.0f + 0.3f * 2.0f * (GD.Randf() - 0.5f);
 				wolfTill = preTill = 0;
 				jumpTill = frameCounter + jumpFrames;
 				jumpTurnTill = frameCounter + jumpTurnFrames;
@@ -217,6 +220,8 @@ namespace Fcc{
 							ps.Possess(this);
 							isSoulForm = false;
 							wolfTill = jumpTill = 0;
+							level.loader.BGM1asp.VolumeDb = level.loader.volume;
+							level.loader.BGM2asp.VolumeDb = Mathf.LinearToDb(0);
 						}
 					}
 				}
